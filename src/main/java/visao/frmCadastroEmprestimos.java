@@ -31,6 +31,7 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(590, 360));
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
@@ -42,7 +43,7 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(-60, -20, 330, 240);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/huge__1_-removebg-preview.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagem emprestimo.png"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(410, 170, 170, 180);
 
