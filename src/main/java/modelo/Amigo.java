@@ -1,13 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
-/**
- *
- * @author legen
- */
+import dao.AmigoDAO;
+import java.util.ArrayList;
+import java.sql.SQLException;
+
+
 public class Amigo {
-    
+// Atributos
+
+    private int id;
+    private String nome;
+    private String telefone;
+    private final AmigoDAO dao;
+    public Amigo(){
+        this.dao = new AmigoDAO();
+    }  
 }
