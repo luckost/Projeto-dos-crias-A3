@@ -6,12 +6,12 @@ package visao;
 
 /**
  *
- * @author legen
+ * @author User
  */
 public class frmCadastroAmigo extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmCadastroAmigo
+     * Creates new form frmGerenciaAmigos
      */
     public frmCadastroAmigo() {
         initComponents();
@@ -26,21 +26,96 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jTituloCadastroAmigo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        JTFNome = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        JTFNumero = new javax.swing.JTextField();
+        JBCancelar = new javax.swing.JButton();
+        JBCadastrar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Amigo");
+        setMinimumSize(new java.awt.Dimension(590, 365));
+        getContentPane().setLayout(null);
+
+        jTituloCadastroAmigo.setFont(new java.awt.Font("Trebuchet MS", 1, 25)); // NOI18N
+        jTituloCadastroAmigo.setText("Cadastrar Amigo");
+        getContentPane().add(jTituloCadastroAmigo);
+        jTituloCadastroAmigo.setBounds(182, 31, 191, 30);
+
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel2.setText("Nome:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(6, 106, 50, 18);
+
+        JTFNome.setForeground(new java.awt.Color(204, 204, 204));
+        JTFNome.setText("Insira o nome :");
+        JTFNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFNomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(JTFNome);
+        JTFNome.setBounds(6, 130, 450, 25);
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel3.setText("Numero :");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(6, 173, 70, 18);
+
+        JTFNumero.setForeground(new java.awt.Color(204, 204, 204));
+        JTFNumero.setText("Insira o numero de telefone:");
+        getContentPane().add(JTFNumero);
+        JTFNumero.setBounds(6, 197, 430, 25);
+
+        JBCancelar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        JBCancelar.setForeground(new java.awt.Color(255, 0, 0));
+        JBCancelar.setText("Cancelar");
+        JBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(JBCancelar);
+        JBCancelar.setBounds(365, 280, 110, 40);
+
+        JBCadastrar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        JBCadastrar.setForeground(new java.awt.Color(0, 204, 0));
+        JBCadastrar.setText("Cadastrar");
+        JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(JBCadastrar);
+        JBCadastrar.setBounds(89, 280, 110, 40);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagem amigo.png"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(390, 120, 200, 220);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(-40, -20, 300, 240);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFNomeActionPerformed
+
+    private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
+     this.dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBCancelarActionPerformed
+
+    private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,6 +143,7 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmCadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -78,5 +154,14 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBCadastrar;
+    private javax.swing.JButton JBCancelar;
+    private javax.swing.JTextField JTFNome;
+    private javax.swing.JTextField JTFNumero;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jTituloCadastroAmigo;
     // End of variables declaration//GEN-END:variables
 }

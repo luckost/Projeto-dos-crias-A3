@@ -6,12 +6,12 @@ package visao;
 
 /**
  *
- * @author legen
+ * @author User
  */
 public class frmCadastroFerramenta extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmCadastroFerramenta
+     * Creates new form frmCadastroEmprestimo
      */
     public frmCadastroFerramenta() {
         initComponents();
@@ -26,21 +26,90 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        JTFNome = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        JTFMarca = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        JTFPreço = new javax.swing.JTextField();
+        JBCancelar2 = new javax.swing.JButton();
+        JBCadastrar2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Ferramentas");
+        setMaximumSize(new java.awt.Dimension(590, 340));
+        setMinimumSize(new java.awt.Dimension(590, 365));
+        getContentPane().setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel1.setText("Cadastrar Ferramenta");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(167, 27, 248, 44);
+        getContentPane().add(JTFNome);
+        JTFNome.setBounds(60, 123, 205, 22);
+
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel2.setText("Nome:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(6, 127, 50, 18);
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel3.setText("Marca:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(291, 127, 50, 18);
+        getContentPane().add(JTFMarca);
+        JTFMarca.setBounds(345, 123, 205, 22);
+
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel4.setText("Preço de Custo:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(6, 208, 110, 18);
+        getContentPane().add(JTFPreço);
+        JTFPreço.setBounds(120, 210, 423, 22);
+
+        JBCancelar2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        JBCancelar2.setForeground(new java.awt.Color(255, 0, 0));
+        JBCancelar2.setText("Cancelar");
+        JBCancelar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCancelar2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(JBCancelar2);
+        JBCancelar2.setBounds(360, 280, 110, 40);
+
+        JBCadastrar2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        JBCadastrar2.setForeground(new java.awt.Color(51, 255, 51));
+        JBCadastrar2.setText("Cadastrar");
+        JBCadastrar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrar2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(JBCadastrar2);
+        JBCadastrar2.setBounds(90, 280, 110, 40);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(-40, -20, 280, 250);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Caixa.png"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(420, 210, 170, 130);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JBCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelar2ActionPerformed
+             this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_JBCancelar2ActionPerformed
+
+    private void JBCadastrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBCadastrar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -53,7 +122,7 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -68,6 +137,7 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmCadastroFerramenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -78,5 +148,16 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBCadastrar2;
+    private javax.swing.JButton JBCancelar2;
+    private javax.swing.JTextField JTFMarca;
+    private javax.swing.JTextField JTFNome;
+    private javax.swing.JTextField JTFPreço;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

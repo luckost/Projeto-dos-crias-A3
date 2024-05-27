@@ -6,12 +6,12 @@ package visao;
 
 /**
  *
- * @author legen
+ * @author User
  */
 public class frmMenuPrincipal extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmMenuPrincipal
+     * Creates new form MenuPrincipal
      */
     public frmMenuPrincipal() {
         initComponents();
@@ -26,21 +26,162 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuOpçoes = new javax.swing.JMenu();
+        jMenuItemCadastroAmigo = new javax.swing.JMenuItem();
+        jMenuItemCadastroFerramenta = new javax.swing.JMenuItem();
+        jMenuItemGerenciaEmprestimo = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemSair = new javax.swing.JMenuItem();
+        jMenuSobre = new javax.swing.JMenu();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Emprestimo sist");
+        setBackground(new java.awt.Color(102, 102, 102));
+        setMinimumSize(new java.awt.Dimension(590, 365));
+        getContentPane().setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(151, 63, 0, 29);
+
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Sistema_Emprestimos.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 590, 310);
+
+        jMenuOpçoes.setText("Opçoes");
+
+        jMenuItemCadastroAmigo.setText("Cadastrar Amigo");
+        jMenuItemCadastroAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroAmigoActionPerformed(evt);
+            }
+        });
+        jMenuOpçoes.add(jMenuItemCadastroAmigo);
+
+        jMenuItemCadastroFerramenta.setText("Cadastrar Ferramenta");
+        jMenuItemCadastroFerramenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroFerramentaActionPerformed(evt);
+            }
+        });
+        jMenuOpçoes.add(jMenuItemCadastroFerramenta);
+
+        jMenuItemGerenciaEmprestimo.setText("Gerenciar Emprestimos");
+        jMenuItemGerenciaEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGerenciaEmprestimoActionPerformed(evt);
+            }
+        });
+        jMenuOpçoes.add(jMenuItemGerenciaEmprestimo);
+
+        jMenuItem1.setText("Tabela Ferramentas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuOpçoes.add(jMenuItem1);
+
+        jMenuItem2.setText("Tabela de Amigos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuOpçoes.add(jMenuItem2);
+
+        jMenuItemSair.setText("Sair");
+        jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSairActionPerformed(evt);
+            }
+        });
+        jMenuOpçoes.add(jMenuItemSair);
+
+        jMenuBar1.add(jMenuOpçoes);
+
+        jMenuSobre.setText("Sobre");
+        jMenuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuSobreMouseClicked(evt);
+            }
+        });
+        jMenuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSobreActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenuSobre);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
+        System.exit(0);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemSairActionPerformed
+
+    private void jMenuItemCadastroAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroAmigoActionPerformed
+        frmCadastroAmigo objeto = new frmCadastroAmigo();
+        objeto.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCadastroAmigoActionPerformed
+
+    private void jMenuItemCadastroFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroFerramentaActionPerformed
+        frmCadastroFerramenta objeto = new frmCadastroFerramenta();
+        objeto.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCadastroFerramentaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        frmGerenciaFerramenta objeto = new frmGerenciaFerramenta();
+        objeto.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        frmGerenciaAmigo objeto = new frmGerenciaAmigo();
+        objeto.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSobreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuSobreActionPerformed
+
+    private void jMenuSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSobreMouseClicked
+        // TODO add your handling code here:
+        frmSobre objeto = new frmSobre();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuSobreMouseClicked
+
+    private void jMenuItemGerenciaEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGerenciaEmprestimoActionPerformed
+        frmGerenciaEmprestimos objeto = new frmGerenciaEmprestimos();
+        objeto.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemGerenciaEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -53,7 +194,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("FlatLaf Dark".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -68,6 +209,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -78,5 +220,21 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemCadastroAmigo;
+    private javax.swing.JMenuItem jMenuItemCadastroFerramenta;
+    private javax.swing.JMenuItem jMenuItemGerenciaEmprestimo;
+    private javax.swing.JMenuItem jMenuItemSair;
+    private javax.swing.JMenu jMenuOpçoes;
+    private javax.swing.JMenu jMenuSobre;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public static class setLocationRelativeTo {
+
+    }
 }
