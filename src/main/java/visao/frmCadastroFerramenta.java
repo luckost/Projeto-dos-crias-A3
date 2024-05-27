@@ -40,14 +40,13 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Ferramentas");
-        setMaximumSize(new java.awt.Dimension(590, 340));
         setMinimumSize(new java.awt.Dimension(590, 365));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel1.setText("Cadastrar Ferramenta");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(167, 27, 248, 44);
+        jLabel1.setBounds(167, 27, 247, 44);
         getContentPane().add(JTFNome);
         JTFNome.setBounds(60, 123, 205, 22);
 

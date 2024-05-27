@@ -44,7 +44,7 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         jTituloCadastroAmigo.setFont(new java.awt.Font("Trebuchet MS", 1, 25)); // NOI18N
         jTituloCadastroAmigo.setText("Cadastrar Amigo");
         getContentPane().add(jTituloCadastroAmigo);
-        jTituloCadastroAmigo.setBounds(182, 31, 191, 30);
+        jTituloCadastroAmigo.setBounds(182, 31, 190, 30);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel2.setText("Nome:");
@@ -59,7 +59,7 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(JTFNome);
-        JTFNome.setBounds(6, 130, 450, 25);
+        JTFNome.setBounds(6, 130, 450, 30);
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel3.setText("Numero :");
@@ -69,7 +69,7 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         JTFNumero.setForeground(new java.awt.Color(204, 204, 204));
         JTFNumero.setText("Insira o numero de telefone:");
         getContentPane().add(JTFNumero);
-        JTFNumero.setBounds(6, 197, 430, 25);
+        JTFNumero.setBounds(6, 197, 430, 30);
 
         JBCancelar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         JBCancelar.setForeground(new java.awt.Color(255, 0, 0));
