@@ -4,7 +4,6 @@ import dao.AmigoDAO;
 import java.util.ArrayList;
 import java.sql.SQLException;
 
-
 public class Amigo {
 // Atributos
 
@@ -12,10 +11,12 @@ public class Amigo {
     private String nome;
     private String telefone;
     private final AmigoDAO dao;
-    public Amigo(){
+
+    public Amigo() {
         this.dao = new AmigoDAO();
-    }  
- public Amigo(String nome, String telefone) {
+    }
+
+    public Amigo(String nome, String telefone) {
         this.dao = new AmigoDAO();
         this.nome = nome;
         this.telefone = telefone;
@@ -30,15 +31,14 @@ public class Amigo {
     }
 // Métodos GET e SET
 
-
-
-    public int getId(){
+    public int getId() {
         return id;
     }
-    
-    public void setId (int id){
+
+    public void setId(int id) {
         this.id = id;
     }
+
     public String getNome() {
         return nome;
     }
@@ -54,5 +54,32 @@ public class Amigo {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+    //controles 
+
+    public int maiorID() throws SQLException {
+        return dao.pegaMaiorID();
+    }
+
+    public ArrayList pegarLista() {
+        return dao.getMinhaLista();
+    }
+
+    public boolean insertAmigo(String nome, String telefone) throws SQLException {
+        int id = this.maiorID() + 1;
+        Amigo objeto = new Amigo(id, nome, telefone);
+        dao.JBCadastrar(objeto);
+    }
+
+    public boolean updateAmigoBD(String nome, int id, String telefone) {
+        Amigo objeto = new Amigo(id, nome, telefone);
+        dao.JBAlterarTab2(objeto);
+        return true;
+    }
+
+    public boolean deleteAmigoBD(int id) {
+        dao.JBApagarTab2(id);
+        return true;
+    }
 }
+
 
