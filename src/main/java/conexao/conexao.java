@@ -8,10 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author User
- */
+
 public class conexao {
     private static final String url = "jdbc:mysql://localhost:3306/sistemaemprestimos";
     private static final String user = "root";
@@ -19,7 +16,7 @@ public class conexao {
     
     private static Connection conn; 
             
-    public static Connection getconexao() throws SQLException{
+    public static Connection getConnection() throws SQLException{
         try {
         if (conn == null){
                 conn = DriverManager.getConnection(url, user, password);

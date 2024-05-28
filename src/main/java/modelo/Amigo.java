@@ -57,27 +57,28 @@ public class Amigo {
     //controles 
 
     public int maiorID() throws SQLException {
-        return dao.pegaMaiorID();
+        return dao.pegarMaiorID();
     }
 
-    public ArrayList pegarLista() {
-        return dao.getMinhaLista();
+    public ArrayList pegarList() {
+        return dao.getList();
     }
 
-    public boolean insertAmigo(String nome, String telefone) throws SQLException {
+    public boolean cadastrarAmigo(String nome, String telefone) throws SQLException {
         int id = this.maiorID() + 1;
         Amigo objeto = new Amigo(id, nome, telefone);
-        dao.JBCadastrar(objeto);
-    }
-
-    public boolean updateAmigoBD(String nome, int id, String telefone) {
-        Amigo objeto = new Amigo(id, nome, telefone);
-        dao.JBAlterarTab2(objeto);
+        dao.cadastrarAmigo(objeto);
         return true;
     }
 
-    public boolean deleteAmigoBD(int id) {
-        dao.JBApagarTab2(id);
+    public boolean alterarAmigo(String nome, int id, String telefone) {
+        Amigo objeto = new Amigo(id, nome, telefone);
+        dao.alterarAmigo(objeto);
+        return true;
+    }
+
+    public boolean apagarAmigo(int id) {
+        dao.apagarAmigo(id);
         return true;
     }
 }
