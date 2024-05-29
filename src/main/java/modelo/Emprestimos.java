@@ -8,6 +8,6 @@ package modelo;
  *
  * @author legen
  */
-public class Emprestimo {
+public class Emprestimos {
     
 }

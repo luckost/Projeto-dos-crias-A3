@@ -4,7 +4,7 @@ import dao.AmigoDAO;
 import java.util.ArrayList;
 import java.sql.SQLException;
 
-public class Amigo {
+public class Amigos {
 // Atributos
 
     private int id;
@@ -12,12 +12,12 @@ public class Amigo {
     private String telefone;
 
 //Construtor de Objeto Vazio
-    public Amigo() {
+    public Amigos() {
         this(0, "", "");
     }
 
 // Construtor de Objeto, com parâmetros
-    public Amigo(int id, String nome, String telefone) {
+    public Amigos(int id, String nome, String telefone) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
@@ -58,21 +58,21 @@ public class Amigo {
     para usar com bancos de dados.*/
     //Retorna a Lista de Amigos(obejtos)
 
-    public ArrayList getMinhaLista() {
+    public ArrayList<Amigos> getMinhaLista() {
         return AmigoDAO.getMinhaLista();
     }
-//Cadastra novo Amigo
+//Cadastra novo Amigos
 
     public boolean inserirAmigoDB(String nome, String telefone) throws SQLException {
         int id = this.maiorID() + 1;
-        Amigo objeto = new Amigo(id, nome, telefone);
+        Amigos objeto = new Amigos(id, nome, telefone);
         getMinhaLista().add(objeto);
         return true;
     }
-//Edita um Amigo específico pelo seu campo ID
+//Edita um Amigos específico pelo seu campo ID
 
     public boolean updateAmigoDB(String nome, int id, String telefone) {
-        Amigo objeto = new Amigo(id, nome, telefone);
+        Amigos objeto = new Amigos(id, nome, telefone);
         int indice = this.procuraIndice(id);
         getMinhaLista().set(indice, objeto);
         return true;
@@ -91,17 +91,18 @@ public class Amigo {
         for (int i = 0; i < getMinhaLista().size(); i++) {
             if (getMinhaLista().get(i).getId() == id) {
                 indice = i;
+                break;
             }
         }
 
         return indice;
 
     }
-//Carrega dados de um Amigo específico pelo seu Id
+//Carrega dados de um Amigos específico pelo seu Id
 
-    public Amigo carregaAmigo(int id) {
+    public Amigos carregaAmigo(int id) {
         int indice = this.procuraIndice(id);
-        return (Amigo) getMinhaLista().get(indice);
+        return (Amigos) getMinhaLista().get(indice);
     }
 
     //Retorna o maior Id da nossa base de dados
