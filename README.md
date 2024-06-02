@@ -40,4 +40,4 @@ total.
 
 ## Banco de dados
 Usuário: root
-Senha:252426
+Senha:252426cd
