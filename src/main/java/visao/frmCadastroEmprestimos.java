@@ -27,28 +27,98 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jNomeEmprestimo = new javax.swing.JTextField();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        JBCadastrar3 = new javax.swing.JButton();
+        JBCancelar2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jImagemEngrenagem = new javax.swing.JLabel();
+        jImagemEmprestimo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Emprestimos");
         setMinimumSize(new java.awt.Dimension(590, 360));
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel2.setText("Cadastrar Empréstimo");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(160, 10, 260, 29);
+        jLabel2.setBounds(160, 20, 260, 29);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel4.setText("Nome: ");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(10, 100, 46, 18);
+
+        jNomeEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNomeEmprestimoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jNomeEmprestimo);
+        jNomeEmprestimo.setBounds(60, 100, 250, 22);
+        getContentPane().add(jFormattedTextField1);
+        jFormattedTextField1.setBounds(470, 100, 80, 22);
+
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel1.setText("Ferramentas:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(-60, -20, 330, 240);
+        jLabel1.setBounds(10, 180, 90, 18);
+        getContentPane().add(jTextField2);
+        jTextField2.setBounds(100, 180, 210, 22);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagem emprestimo.png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(410, 170, 170, 180);
+        JBCadastrar3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        JBCadastrar3.setForeground(new java.awt.Color(51, 255, 51));
+        JBCadastrar3.setText("Cadastrar");
+        JBCadastrar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrar3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(JBCadastrar3);
+        JBCadastrar3.setBounds(110, 270, 110, 40);
+
+        JBCancelar2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        JBCancelar2.setForeground(new java.awt.Color(255, 0, 0));
+        JBCancelar2.setText("Cancelar");
+        JBCancelar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCancelar2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(JBCancelar2);
+        JBCancelar2.setBounds(360, 270, 110, 40);
+
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel5.setText("Data de Emprestimo:");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(330, 100, 140, 18);
+
+        jImagemEngrenagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
+        getContentPane().add(jImagemEngrenagem);
+        jImagemEngrenagem.setBounds(-60, -30, 280, 240);
+
+        jImagemEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagem emprestimo.png"))); // NOI18N
+        getContentPane().add(jImagemEmprestimo);
+        jImagemEmprestimo.setBounds(420, 170, 180, 170);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jNomeEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNomeEmprestimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNomeEmprestimoActionPerformed
+
+    private void JBCadastrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrar3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBCadastrar3ActionPerformed
+
+    private void JBCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelar2ActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_JBCancelar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -61,7 +131,7 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -86,8 +156,16 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBCadastrar3;
+    private javax.swing.JButton JBCancelar2;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JLabel jImagemEmprestimo;
+    private javax.swing.JLabel jImagemEngrenagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jNomeEmprestimo;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

@@ -46,7 +46,7 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel1.setText("Cadastrar Ferramenta");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(167, 27, 247, 44);
+        jLabel1.setBounds(167, 27, 248, 44);
         getContentPane().add(JTFNome);
         JTFNome.setBounds(60, 123, 205, 22);
 
@@ -93,7 +93,7 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(-40, -20, 280, 250);
+        jLabel7.setBounds(-60, -40, 280, 250);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Caixa.png"))); // NOI18N
         getContentPane().add(jLabel5);
