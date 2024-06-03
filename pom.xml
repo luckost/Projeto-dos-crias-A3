@@ -10,6 +10,13 @@
     <artifactId>mysql-connector-java</artifactId>
     <version>8.0.28</version> <!-- Versão mais recente disponível -->
 </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>

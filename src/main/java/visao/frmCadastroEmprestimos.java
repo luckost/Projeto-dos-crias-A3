@@ -29,7 +29,6 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jNomeEmprestimo = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         JBCadastrar3 = new javax.swing.JButton();
@@ -37,10 +36,11 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jImagemEngrenagem = new javax.swing.JLabel();
         jImagemEmprestimo = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Emprestimos");
-        setMinimumSize(new java.awt.Dimension(590, 360));
+        setMinimumSize(new java.awt.Dimension(610, 360));
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
@@ -51,7 +51,7 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel4.setText("Nome: ");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 100, 46, 18);
+        jLabel4.setBounds(10, 100, 50, 18);
 
         jNomeEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,15 +60,13 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         });
         getContentPane().add(jNomeEmprestimo);
         jNomeEmprestimo.setBounds(60, 100, 250, 22);
-        getContentPane().add(jFormattedTextField1);
-        jFormattedTextField1.setBounds(470, 100, 80, 22);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel1.setText("Ferramentas:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 180, 90, 18);
+        jLabel1.setBounds(10, 180, 100, 18);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(100, 180, 210, 22);
+        jTextField2.setBounds(110, 180, 210, 22);
 
         JBCadastrar3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         JBCadastrar3.setForeground(new java.awt.Color(51, 255, 51));
@@ -104,6 +102,8 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         jImagemEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagem emprestimo.png"))); // NOI18N
         getContentPane().add(jImagemEmprestimo);
         jImagemEmprestimo.setBounds(420, 170, 180, 170);
+        getContentPane().add(jDateChooser1);
+        jDateChooser1.setBounds(470, 100, 110, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -158,7 +158,7 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar3;
     private javax.swing.JButton JBCancelar2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jImagemEmprestimo;
     private javax.swing.JLabel jImagemEngrenagem;
     private javax.swing.JLabel jLabel1;
