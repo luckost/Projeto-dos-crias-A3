@@ -1,5 +1,4 @@
 # 🛠️ Sistema de Gestão de Empréstimos de Ferramentas
-
 Bem-vindo ao Sistema de Gestão de Empréstimos de Ferramentas! Este software ajuda a organizar e controlar ferramentas emprestadas.
 
 ## 📋 Funcionalidades Principais
@@ -46,3 +45,9 @@ Bem-vindo ao Sistema de Gestão de Empréstimos de Ferramentas! Este software aj
 
 - **Usuário:** root
 - **Senha:** 252426cd
+
+## 🚀 Instalação
+
+ Clone o repositório:
+   ```bash
+   git clone https://github.com/LucasdaCosta04/Projeto-1S-PSC.git
