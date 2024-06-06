@@ -1,60 +1,61 @@
 package dao;
 
+
 import modelo.Amigos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AmigoDAO {
 
+    private static final Logger LOGGER = Logger.getLogger(AmigoDAO.class.getName());
     public static ArrayList<Amigos> MinhaLista = new ArrayList<>();
 
     public AmigoDAO() {
     }
 
-    //esse metodo serve para pegar o maior e ultimo id cadastrado no banco
-    public int pegaMaiorID() throws SQLException {
+    public int pegaMaiorID() {
         int maior = 0;
         try {
             Connection conexaoBD = Connection.getConexaoBD();
             if (conexaoBD != null) {
                 try (Statement stmt = conexaoBD.createStatement()) {
                     ResultSet res = stmt.executeQuery("SELECT MAX(id_amigo) id_amigo FROM amigos");
-                    res.next();
-                    maior = res.getInt("id_amigo");
+                    if (res.next()) {
+                        maior = res.getInt("id_amigo");
+                    }
                 }
             }
         } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Erro ao pegar maior ID", ex);
         }
         return maior;
     }
 
-    public ArrayList getMinhaLista() {
+    public ArrayList<Amigos> getMinhaLista() {
         MinhaLista.clear();
-        //imporatnte limpar a lista antes de dar um get pq caso tenhamos dado um 
-        //insert/update novo no banco atualizamos ela certinho
         try {
             Connection conexaoBD = Connection.getConexaoBD();
             if (conexaoBD != null) {
-                Statement conecaox = conexaoBD.createStatement();
-                ResultSet resposta = conecaox.executeQuery("SELECT * FROM amigos");
-                while (resposta.next()) {
-                    int id = resposta.getInt("id_amigo");
-                    String nome = resposta.getString("nome");
-                    String telefone = resposta.getString("telefone");
+                try (Statement stmt = conexaoBD.createStatement()) {
+                    ResultSet resposta = stmt.executeQuery("SELECT * FROM amigos");
+                    while (resposta.next()) {
+                        int id = resposta.getInt("id_amigo");
+                        String nome = resposta.getString("nome");
+                        String telefone = resposta.getString("telefone");
 
-                    Amigos objeto = new Amigos(id, nome, telefone);
-                    MinhaLista.add(objeto);
+                        Amigos objeto = new Amigos(id, nome, telefone);
+                        MinhaLista.add(objeto);
+                    }
                 }
-                conecaox.close();
             }
-
         } catch (SQLException ex) {
-            //caso de erro
+            LOGGER.log(Level.SEVERE, "Erro ao obter lista de amigos", ex);
         }
         return MinhaLista;
     }
@@ -68,11 +69,11 @@ public class AmigoDAO {
                     stmt.setString(1, objeto.getNome());
                     stmt.setString(2, objeto.getTelefone());
                     stmt.execute();
+                    return true;
                 }
-                return true;
             }
         } catch (SQLException erro) {
-            throw new RuntimeException(erro);
+            LOGGER.log(Level.SEVERE, "Erro ao inserir amigo", erro);
         }
         return false;
     }
@@ -83,12 +84,13 @@ public class AmigoDAO {
             if (conexaoBD != null) {
                 try (Statement stmt = conexaoBD.createStatement()) {
                     stmt.executeUpdate("DELETE FROM amigos WHERE id_amigo = " + id);
-                    stmt.close();
+                    return true;
                 }
             }
         } catch (SQLException erro) {
+            LOGGER.log(Level.SEVERE, "Erro ao deletar amigo", erro);
         }
-        return true;
+        return false;
     }
 
     public boolean atualizarAmigo(Amigos objeto) {
@@ -105,7 +107,7 @@ public class AmigoDAO {
                 }
             }
         } catch (SQLException erro) {
-            throw new RuntimeException(erro);
+            LOGGER.log(Level.SEVERE, "Erro ao atualizar amigo", erro);
         }
         return false;
     }
@@ -117,15 +119,15 @@ public class AmigoDAO {
             Connection conexaoBD = Connection.getConexaoBD();
             if (conexaoBD != null) {
                 try (Statement stmt = conexaoBD.createStatement()) {
-                    //executa nossa query
                     ResultSet resposta = stmt.executeQuery("SELECT * FROM amigos WHERE id_amigo = " + id);
-                    resposta.next();
-                    objeto.setNome(resposta.getString("nome"));
-                    objeto.setTelefone(resposta.getString("telefone"));
+                    if (resposta.next()) {
+                        objeto.setNome(resposta.getString("nome"));
+                        objeto.setTelefone(resposta.getString("telefone"));
+                    }
                 }
             }
         } catch (SQLException erro) {
-              throw new RuntimeException(erro);
+            LOGGER.log(Level.SEVERE, "Erro ao carregar amigo", erro);
         }
         return objeto;
     }
