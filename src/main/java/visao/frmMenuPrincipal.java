@@ -26,16 +26,20 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuOpçoes = new javax.swing.JMenu();
         jMenuItemCadastroAmigo = new javax.swing.JMenuItem();
         jMenuItemCadastroFerramenta = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItemGerenciaEmprestimo = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuSobre = new javax.swing.JMenu();
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Emprestimo sist");
@@ -76,6 +80,14 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuOpçoes.add(jMenuItemCadastroFerramenta);
+
+        jMenuItem4.setText("Cadastrar Emprestimo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuOpçoes.add(jMenuItem4);
 
         jMenuItemGerenciaEmprestimo.setText("Gerenciar Emprestimos");
         jMenuItemGerenciaEmprestimo.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +181,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         objeto.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemGerenciaEmprestimoActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+  frmCadastroEmprestimos objeto = new frmCadastroEmprestimos();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,6 +226,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItemCadastroAmigo;
     private javax.swing.JMenuItem jMenuItemCadastroFerramenta;
     private javax.swing.JMenuItem jMenuItemGerenciaEmprestimo;
