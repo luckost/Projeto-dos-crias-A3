@@ -34,8 +34,6 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         JBCadastrar3 = new javax.swing.JButton();
         JBCancelar2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jImagemEngrenagem = new javax.swing.JLabel();
-        jImagemEmprestimo = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,14 +92,6 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         jLabel5.setText("Data de Emprestimo:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(330, 100, 140, 18);
-
-        jImagemEngrenagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
-        getContentPane().add(jImagemEngrenagem);
-        jImagemEngrenagem.setBounds(-60, -30, 280, 240);
-
-        jImagemEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagem emprestimo.png"))); // NOI18N
-        getContentPane().add(jImagemEmprestimo);
-        jImagemEmprestimo.setBounds(420, 170, 180, 170);
         getContentPane().add(jDateChooser1);
         jDateChooser1.setBounds(470, 100, 110, 22);
 
@@ -159,8 +149,6 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
     private javax.swing.JButton JBCadastrar3;
     private javax.swing.JButton JBCancelar2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jImagemEmprestimo;
-    private javax.swing.JLabel jImagemEngrenagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

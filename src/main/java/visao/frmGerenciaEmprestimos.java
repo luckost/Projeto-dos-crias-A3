@@ -36,8 +36,6 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         JBCadastrar3 = new javax.swing.JButton();
         JBCancelar2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
@@ -113,14 +111,6 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         });
         getContentPane().add(JBCancelar2);
         JBCancelar2.setBounds(360, 270, 110, 40);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(-40, -30, 280, 240);
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagem gerencia.png"))); // NOI18N
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(390, 230, 156, 150);
         getContentPane().add(jDateChooser1);
         jDateChooser1.setBounds(470, 150, 100, 22);
         getContentPane().add(jDateChooser2);
@@ -182,11 +172,9 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jNomeEmprestimo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

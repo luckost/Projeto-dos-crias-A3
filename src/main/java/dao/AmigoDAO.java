@@ -1,13 +1,8 @@
 package dao;
 
-
 import modelo.Amigos;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +17,7 @@ public class AmigoDAO {
     public int pegaMaiorID() {
         int maior = 0;
         try {
-            Connection conexaoBD = Connection.getConexaoBD();
+            Connection conexaoBD = BDConnection.getConexaoBD();
             if (conexaoBD != null) {
                 try (Statement stmt = conexaoBD.createStatement()) {
                     ResultSet res = stmt.executeQuery("SELECT MAX(id_amigo) id_amigo FROM amigos");
@@ -40,7 +35,7 @@ public class AmigoDAO {
     public ArrayList<Amigos> getMinhaLista() {
         MinhaLista.clear();
         try {
-            Connection conexaoBD = Connection.getConexaoBD();
+            Connection conexaoBD = BDConnection.getConexaoBD();
             if (conexaoBD != null) {
                 try (Statement stmt = conexaoBD.createStatement()) {
                     ResultSet resposta = stmt.executeQuery("SELECT * FROM amigos");
@@ -63,7 +58,7 @@ public class AmigoDAO {
     public boolean inserirAmigoBD(Amigos objeto) {
         String sql = "INSERT INTO amigos(nome, telefone) VALUES(?, ?)";
         try {
-            Connection conexaoBD = Connection.getConexaoBD();
+            Connection conexaoBD = BDConnection.getConexaoBD();
             if (conexaoBD != null) {
                 try (PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
                     stmt.setString(1, objeto.getNome());
@@ -80,7 +75,7 @@ public class AmigoDAO {
 
     public boolean deletaAmigoBD(int id) {
         try {
-            Connection conexaoBD = Connection.getConexaoBD();
+            Connection conexaoBD = BDConnection.getConexaoBD();
             if (conexaoBD != null) {
                 try (Statement stmt = conexaoBD.createStatement()) {
                     stmt.executeUpdate("DELETE FROM amigos WHERE id_amigo = " + id);
@@ -96,7 +91,7 @@ public class AmigoDAO {
     public boolean atualizarAmigo(Amigos objeto) {
         String sintaxe = "UPDATE amigos SET nome = ?, telefone = ? WHERE id_amigo = ?";
         try {
-            Connection conexaoBD = Connection.getConexaoBD();
+            Connection conexaoBD = BDConnection.getConexaoBD();
             if (conexaoBD != null) {
                 try (PreparedStatement stmt = conexaoBD.prepareStatement(sintaxe)) {
                     stmt.setString(1, objeto.getNome());
@@ -116,7 +111,7 @@ public class AmigoDAO {
         Amigos objeto = new Amigos(); //cria o objeto
         objeto.setId(id); //seta o id recebido por parametro para o objeto
         try {
-            Connection conexaoBD = Connection.getConexaoBD();
+            Connection conexaoBD = BDConnection.getConexaoBD();
             if (conexaoBD != null) {
                 try (Statement stmt = conexaoBD.createStatement()) {
                     ResultSet resposta = stmt.executeQuery("SELECT * FROM amigos WHERE id_amigo = " + id);

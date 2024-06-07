@@ -35,8 +35,6 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
         JTFPreço = new javax.swing.JTextField();
         JBCancelar2 = new javax.swing.JButton();
         JBCadastrar2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Ferramentas");
@@ -46,7 +44,7 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
         jLabel1.setText("Cadastrar Ferramenta");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(167, 27, 248, 44);
+        jLabel1.setBounds(167, 27, 247, 44);
         getContentPane().add(JTFNome);
         JTFNome.setBounds(60, 123, 205, 22);
 
@@ -90,14 +88,6 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
         });
         getContentPane().add(JBCadastrar2);
         JBCadastrar2.setBounds(90, 280, 110, 40);
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(-60, -40, 280, 250);
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Caixa.png"))); // NOI18N
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(420, 210, 170, 130);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,7 +146,5 @@ public class frmCadastroFerramenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

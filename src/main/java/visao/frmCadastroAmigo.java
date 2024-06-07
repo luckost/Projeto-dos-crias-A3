@@ -33,8 +33,6 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         JTFNumero = new javax.swing.JTextField();
         JBCancelar = new javax.swing.JButton();
         JBCadastrar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Amigo");
@@ -93,14 +91,6 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         getContentPane().add(JBCadastrar);
         JBCadastrar.setBounds(89, 280, 110, 40);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagem amigo.png"))); // NOI18N
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(390, 120, 200, 220);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Imagem Engrenagem.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(-40, -20, 300, 240);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,10 +148,8 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
     private javax.swing.JButton JBCancelar;
     private javax.swing.JTextField JTFNome;
     private javax.swing.JTextField JTFNumero;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jTituloCadastroAmigo;
     // End of variables declaration//GEN-END:variables
 }
