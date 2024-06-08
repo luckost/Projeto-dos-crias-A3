@@ -1,16 +1,22 @@
 package dao;
 
-import modelo.Amigos;
+import modelo.Amigo;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class AmigoDAO {
-
+    private final BDConnection connectionBD;
     private static final Logger LOGGER = Logger.getLogger(AmigoDAO.class.getName());
 
     public AmigoDAO() {
+        this.connectionBD = new BDConnection();
+
     }
 
     public int pegaMaiorID() {
@@ -28,9 +34,9 @@ public class AmigoDAO {
         return maior;
     }
 
-    public ArrayList<Amigos> getMinhaLista() {
-        ArrayList<Amigos> lista = new ArrayList<>();
-        String sql = "SELECT * FROM amigos";
+    public ArrayList<Amigo> getMinhaLista() {
+        ArrayList<Amigo> lista = new ArrayList<>();
+        String sql = "SELECT * FROM amigo";
         try (Connection conexaoBD = BDConnection.getConnection();
              Statement stmt = conexaoBD.createStatement();
              ResultSet resposta = stmt.executeQuery(sql)) {
@@ -39,7 +45,7 @@ public class AmigoDAO {
                 String nome = resposta.getString("nome");
                 String telefone = resposta.getString("telefone");
 
-                Amigos objeto = new Amigos(id, nome, telefone);
+                Amigo objeto = new Amigo(id, nome, telefone);
                 lista.add(objeto);
             }
         } catch (SQLException ex) {
@@ -48,8 +54,8 @@ public class AmigoDAO {
         return lista;
     }
 
-    public boolean inserirAmigoBD(Amigos objeto) {
-        String sql = "INSERT INTO amigos(nome, telefone) VALUES(?, ?)";
+    public boolean inserirAmigoBD(Amigo objeto) {
+        String sql = "INSERT INTO amigo(nome, telefone) VALUES(?, ?)";
         try (Connection conexaoBD = BDConnection.getConnection();
              PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
             stmt.setString(1, objeto.getNome());
@@ -63,7 +69,7 @@ public class AmigoDAO {
     }
 
     public boolean deletaAmigoBD(int id) {
-        String sql = "DELETE FROM amigos WHERE id_amigo = ?";
+        String sql = "DELETE FROM amigo WHERE id_amigo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
              PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -75,8 +81,8 @@ public class AmigoDAO {
         return false;
     }
 
-    public boolean atualizarAmigo(Amigos objeto) {
-        String sql = "UPDATE amigos SET nome = ?, telefone = ? WHERE id_amigo = ?";
+    public boolean atualizarAmigoBD(Amigo objeto) {
+        String sql = "UPDATE amigo SET nome = ?, telefone = ? WHERE id_amigo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
              PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
             stmt.setString(1, objeto.getNome());
@@ -90,8 +96,8 @@ public class AmigoDAO {
         return false;
     }
 
-    public Amigos carregaAmigo(int id) {
-        String sql = "SELECT * FROM amigos WHERE id_amigo = ?";
+    public Amigo carregaAmigoBD(int id) {
+        String sql = "SELECT * FROM amigo WHERE id_amigo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
              PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -100,7 +106,7 @@ public class AmigoDAO {
                     int amigoId = resposta.getInt("id_amigo");
                     String nome = resposta.getString("nome");
                     String telefone = resposta.getString("telefone");
-                    return new Amigos(amigoId, nome, telefone);
+                    return new Amigo(amigoId, nome, telefone);
                 }
             }
         } catch (SQLException erro) {
@@ -109,8 +115,8 @@ public class AmigoDAO {
         return null;
     }
     
-    public Amigos buscarAmigoPorId(int id) {
-        String sql = "SELECT * FROM amigos WHERE id_amigo = ?";
+    public Amigo buscarAmigoPorId(int id) {
+        String sql = "SELECT * FROM amigo WHERE id_amigo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
              PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -119,7 +125,7 @@ public class AmigoDAO {
                     int amigoId = resposta.getInt("id_amigo");
                     String nome = resposta.getString("nome");
                     String telefone = resposta.getString("telefone");
-                    return new Amigos(amigoId, nome, telefone);
+                    return new Amigo(amigoId, nome, telefone);
                 }
             }
         } catch (SQLException erro) {

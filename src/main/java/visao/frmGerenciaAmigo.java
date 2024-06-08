@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package visao;
+
+import modelo.Amigo;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -10,12 +11,34 @@ package visao;
  */
 public class frmGerenciaAmigo extends javax.swing.JFrame {
 
+    private Amigo objetoAmigo;
+
     /**
      * Creates new form frmGerenciaAmigo
      */
     public frmGerenciaAmigo() {
         initComponents();
+        this.objetoAmigo = new Amigo();
+        this.carregaTabela();
     }
+
+   public void carregaTabela() {
+    DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigo.getModel();
+    modelo.setNumRows(0); // Limpa a tabela
+
+    // Carrega a lista de amigos
+    ArrayList<Amigo> listaAmigos = objetoAmigo.getMinhaLista();
+
+    // Percorre a lista de amigos e adiciona na tabela
+    for (Amigo amigo : listaAmigos) {
+        modelo.addRow(new Object[]{
+            amigo.getId(),
+            amigo.getNome(),
+            amigo.getTelefone()
+        });
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,9 +53,9 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
         jTableAmigo = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextNomeTab2 = new javax.swing.JTextField();
+        JTFNomeTab2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JTextNumeroTab2 = new javax.swing.JTextField();
+        JTFTelefoneTab2 = new javax.swing.JTextField();
         JBApagarTab2 = new javax.swing.JButton();
         JBCancelarTab2 = new javax.swing.JButton();
         JBAlterarTab2 = new javax.swing.JButton();
@@ -43,31 +66,36 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
         jTableAmigo.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jTableAmigo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nome", "Telefone"
+                "Id", "Nome", "Telefone"
             }
         ));
+        jTableAmigo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAmigoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableAmigo);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
@@ -82,6 +110,11 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
         JBApagarTab2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         JBApagarTab2.setForeground(new java.awt.Color(255, 0, 0));
         JBApagarTab2.setText("Apagar");
+        JBApagarTab2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBApagarTab2ActionPerformed(evt);
+            }
+        });
 
         JBCancelarTab2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         JBCancelarTab2.setText("Cancelar");
@@ -94,6 +127,11 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
         JBAlterarTab2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         JBAlterarTab2.setForeground(new java.awt.Color(0, 255, 0));
         JBAlterarTab2.setText("Alterar");
+        JBAlterarTab2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBAlterarTab2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,12 +147,12 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextNomeTab2))
+                                    .addComponent(JTFNomeTab2))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(JTextNumeroTab2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(JTFTelefoneTab2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(JBCancelarTab2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,11 +174,11 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextNomeTab2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFNomeTab2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTextNumeroTab2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFTelefoneTab2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCancelarTab2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,8 +191,104 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBCancelarTab2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarTab2ActionPerformed
-     this.dispose();        // TODO add your handling code here:
+        System.exit(0);
+        // TODO add your handling code here:
     }//GEN-LAST:event_JBCancelarTab2ActionPerformed
+
+    private void JBApagarTab2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarTab2ActionPerformed
+try {
+    // Validando dados da interface gráfica.
+    int id = 0;
+    if (this.jTableAmigo.getSelectedRow() == -1) {
+        throw new Mensagens("Primeiro selecione um amigo para apagar.");
+    } else {
+        id = Integer.parseInt(this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 0).toString());
+    }
+    
+    // Retorna 0 -> primeiro botão | 1 -> segundo botão | 2 -> terceiro botão
+    int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar este amigo?");
+    if (respostaUsuario == 0) { // Clicou em SIM
+        // Envia os dados para o Amigo processar
+        if (this.objetoAmigo.deleteAmigoBD(id)) {
+            // Limpa os campos
+            this.JTFNomeTab2.setText("");
+            this.JTFTelefoneTab2.setText("");
+            JOptionPane.showMessageDialog(rootPane, "Amigo apagado com sucesso!");
+        }
+    }
+    
+    // Atualiza a tabela.
+    System.out.println(this.objetoAmigo.getMinhaLista().toString());
+} catch (Mensagens erro) {
+    JOptionPane.showMessageDialog(null, erro.getMessage());
+} finally {
+    // Atualiza a tabela.
+    carregaTabela();
+}
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_JBApagarTab2ActionPerformed
+
+    private void JBAlterarTab2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAlterarTab2ActionPerformed
+    try {
+    // Recebendo e validando dados da interface gráfica.
+    int id = 0;
+    String nome = "";
+    String telefone = "";
+    
+    if (this.JTFNomeTab2.getText().length() < 2) {
+        throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
+    } else {
+        nome = this.JTFNomeTab2.getText();
+    }
+    
+    if (this.JTFTelefoneTab2.getText().length() < 2) {
+        throw new Mensagens("Telefone deve conter ao menos 2 caracteres.");
+    } else {
+        telefone = this.JTFTelefoneTab2.getText();
+    }
+    
+    if (this.jTableAmigo.getSelectedRow() == -1) {
+        throw new Mensagens("Primeiro selecione um amigo para alterar.");
+    } else {
+        id = Integer.parseInt(this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 0).toString());
+    }
+    
+    // Envia os dados para o Amigo processar
+    if (this.objetoAmigo.updateAmigoBD(id, nome, telefone)) {
+        // Limpa os campos
+        this.JTFNomeTab2.setText("");
+        this.JTFTelefoneTab2.setText("");
+        JOptionPane.showMessageDialog(rootPane, "Amigo alterado com sucesso!");
+    }
+    
+    // Exibe no console os amigos cadastrados
+    System.out.println(this.objetoAmigo.getMinhaLista().toString());
+} catch (Mensagens erro) {
+    JOptionPane.showMessageDialog(null, erro.getMessage());
+} catch (NumberFormatException erro2) {
+    JOptionPane.showMessageDialog(null, "Informe um número válido.");
+} finally {
+    // Atualiza a tabela
+    carregaTabela();
+}
+    
+// TODO add your handling code here:
+    }//GEN-LAST:event_JBAlterarTab2ActionPerformed
+
+    private void jTableAmigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigoMouseClicked
+if (this.jTableAmigo.getSelectedRow() != -1) {
+    String nome = this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 1).toString();
+    String telefone = this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 2).toString();
+    // Aqui você pode obter o ID se precisar
+    // String id = this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 0).toString();
+    
+    this.JTFNomeTab2.setText(nome);
+    this.JTFTelefoneTab2.setText(telefone);
+}
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableAmigoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -195,12 +329,12 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
     private javax.swing.JButton JBAlterarTab2;
     private javax.swing.JButton JBApagarTab2;
     private javax.swing.JButton JBCancelarTab2;
-    private javax.swing.JTextField JTextNumeroTab2;
+    private javax.swing.JTextField JTFNomeTab2;
+    private javax.swing.JTextField JTFTelefoneTab2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAmigo;
-    private javax.swing.JTextField jTextNomeTab2;
     // End of variables declaration//GEN-END:variables
 }

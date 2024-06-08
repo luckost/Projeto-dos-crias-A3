@@ -27,7 +27,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableEmprestimo = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jNomeEmprestimo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -44,7 +44,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(600, 365));
         getContentPane().setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,7 +55,12 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
                 "Amigo", "Ferramentas", "Data do Emprestimo", "Devoluçao"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTableEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableEmprestimoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableEmprestimo);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(6, 6, 572, 107);
@@ -71,7 +76,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jNomeEmprestimo);
-        jNomeEmprestimo.setBounds(60, 150, 250, 22);
+        jNomeEmprestimo.setBounds(60, 150, 250, 26);
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel5.setText("Data de Emprestimo:");
@@ -83,7 +88,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 210, 100, 18);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(110, 210, 210, 22);
+        jTextField2.setBounds(110, 210, 210, 26);
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel3.setText("Data de Devoluçao:");
@@ -112,9 +117,9 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         getContentPane().add(JBCancelar2);
         JBCancelar2.setBounds(360, 270, 110, 40);
         getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(470, 150, 100, 22);
+        jDateChooser1.setBounds(470, 150, 100, 26);
         getContentPane().add(jDateChooser2);
-        jDateChooser2.setBounds(460, 210, 110, 22);
+        jDateChooser2.setBounds(460, 210, 110, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -130,6 +135,11 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     private void JBCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelar2ActionPerformed
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_JBCancelar2ActionPerformed
+
+    private void jTableEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEmprestimoMouseClicked
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableEmprestimoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -177,7 +187,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jNomeEmprestimo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableEmprestimo;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

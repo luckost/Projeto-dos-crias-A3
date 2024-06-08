@@ -4,17 +4,27 @@
  */
 package visao;
 
+import javax.swing.JOptionPane;
+import modelo.Amigo;
+import dao.AmigoDAO;
+
 /**
  *
  * @author User
  */
 public class frmCadastroAmigo extends javax.swing.JFrame {
 
+    private Amigo objetoAmigo;
+    private AmigoDAO amigoDAO;
+
     /**
      * Creates new form frmGerenciaAmigos
      */
     public frmCadastroAmigo() {
         initComponents();
+        this.objetoAmigo = new Amigo();
+        this.amigoDAO = new AmigoDAO();
+
     }
 
     /**
@@ -30,7 +40,7 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         JTFNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JTFNumero = new javax.swing.JTextField();
+        JTFTelefone = new javax.swing.JTextField();
         JBCancelar = new javax.swing.JButton();
         JBCadastrar = new javax.swing.JButton();
 
@@ -42,7 +52,7 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         jTituloCadastroAmigo.setFont(new java.awt.Font("Trebuchet MS", 1, 25)); // NOI18N
         jTituloCadastroAmigo.setText("Cadastrar Amigo");
         getContentPane().add(jTituloCadastroAmigo);
-        jTituloCadastroAmigo.setBounds(182, 31, 190, 30);
+        jTituloCadastroAmigo.setBounds(182, 31, 200, 30);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel2.setText("Nome:");
@@ -50,7 +60,6 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         jLabel2.setBounds(6, 106, 50, 18);
 
         JTFNome.setForeground(new java.awt.Color(204, 204, 204));
-        JTFNome.setText("Insira o nome :");
         JTFNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFNomeActionPerformed(evt);
@@ -60,14 +69,18 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         JTFNome.setBounds(6, 130, 450, 30);
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel3.setText("Numero :");
+        jLabel3.setText("Telefone:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(6, 173, 70, 18);
 
-        JTFNumero.setForeground(new java.awt.Color(204, 204, 204));
-        JTFNumero.setText("Insira o numero de telefone:");
-        getContentPane().add(JTFNumero);
-        JTFNumero.setBounds(6, 197, 430, 30);
+        JTFTelefone.setForeground(new java.awt.Color(204, 204, 204));
+        JTFTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFTelefoneActionPerformed(evt);
+            }
+        });
+        getContentPane().add(JTFTelefone);
+        JTFTelefone.setBounds(6, 197, 430, 30);
 
         JBCancelar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         JBCancelar.setForeground(new java.awt.Color(255, 0, 0));
@@ -94,18 +107,58 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTFNomeActionPerformed
-
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
-     this.dispose();
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_JBCancelarActionPerformed
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
-        // TODO add your handling code here:
+
+            try {
+            String nome = "";
+            String fone = "";
+            if (this.JTFNome.getText().length() < 2) {
+                throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
+            } else {
+                nome = this.JTFNome.getText();
+            }
+            if (this.JTFTelefone.getText().length() < 2) {
+                throw new Mensagens("Telefone deve conter ao menos 2 caracteres.");
+            } else {
+                fone = this.JTFTelefone.getText();
+            }
+            // envia os dados para o Controlador cadastrar
+            Amigo novoAmigo = new Amigo();
+            novoAmigo.setNome(nome);
+            novoAmigo.setTelefone(fone);
+
+            AmigoDAO amigoDAO = new AmigoDAO();
+            boolean inserido = amigoDAO.inserirAmigoBD(novoAmigo);
+
+            if (inserido) {
+                JOptionPane.showMessageDialog(null, "Amigo Cadastrado com Sucesso!");
+                // limpa campos da interface
+                this.JTFNome.setText("");
+                this.JTFTelefone.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar amigo.");
+            }
+            // Exibindo no console o amigo cadastrado
+            System.out.println(this.objetoAmigo.getMinhaLista().toString());
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        }
     }//GEN-LAST:event_JBCadastrarActionPerformed
+
+    private void JTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFNomeActionPerformed
+
+    private void JTFTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFTelefoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,7 +200,7 @@ public class frmCadastroAmigo extends javax.swing.JFrame {
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBCancelar;
     private javax.swing.JTextField JTFNome;
-    private javax.swing.JTextField JTFNumero;
+    private javax.swing.JTextField JTFTelefone;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jTituloCadastroAmigo;

@@ -4,19 +4,19 @@ import dao.AmigoDAO;
 import java.util.ArrayList;
 import java.sql.SQLException;
 
-public class Amigos {
+public class Amigo {
     // Atributos
     private int id;
     private String nome;
     private String telefone;
 
     // Construtor de Objeto Vazio
-    public Amigos() {
+    public Amigo() {
         this(0, "", "");
     }
 
     // Construtor de Objeto, com parâmetros
-    public Amigos(int id, String nome, String telefone) {
+    public Amigo(int id, String nome, String telefone) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
@@ -55,37 +55,37 @@ public class Amigos {
 
     /* Abaixo os métodos para uso junto com o DAO simulando a estrutura em camadas 
     para usar com bancos de dados.*/
-    //Retorna a Lista de Amigos(objetos)
-    public ArrayList<Amigos> getMinhaLista() {
+    //Retorna a Lista de Amigo(objetos)
+    public ArrayList<Amigo> getMinhaLista() {
         AmigoDAO amigoDAO = new AmigoDAO();
         return amigoDAO.getMinhaLista();
     }
 
-    //Cadastra novo Amigos
-    public boolean inserirAmigoDB(String nome, String telefone) throws SQLException {
+    //Cadastra novo Amigo
+    public boolean inserirAmigoBD(String nome, String telefone) throws SQLException {
         AmigoDAO amigoDAO = new AmigoDAO();
         int id = this.maiorID() + 1;
-        Amigos objeto = new Amigos(id, nome, telefone);
+        Amigo objeto = new Amigo(id, nome, telefone);
         return amigoDAO.inserirAmigoBD(objeto);
     }
 
-    //Edita um Amigos específico pelo seu campo ID
-    public boolean updateAmigoDB(String nome, int id, String telefone) {
+    //Edita um Amigo específico pelo seu campo ID
+    public boolean updateAmigoBD(int id, String nome, String telefone) {
         AmigoDAO amigoDAO = new AmigoDAO();
-        Amigos objeto = new Amigos(id, nome, telefone);
-        return amigoDAO.atualizarAmigo(objeto);
+        Amigo objeto = new Amigo(id, nome, telefone);
+        return amigoDAO.atualizarAmigoBD(objeto);
     }
 
-    //Deleta um Amigos específico pelo seu campo ID
-    public boolean deleteAmigoDB(int id) {
+    //Deleta um Amigo específico pelo seu campo ID
+    public boolean deleteAmigoBD(int id) {
         AmigoDAO amigoDAO = new AmigoDAO();
         return amigoDAO.deletaAmigoBD(id);
     }
 
-    //Carrega dados de um Amigos específico pelo seu Id
-    public Amigos carregaAmigo(int id) {
+    //Carrega dados de um Amigo específico pelo seu Id
+    public Amigo carregaAmigoBD(int id) {
         AmigoDAO amigoDAO = new AmigoDAO();
-        return amigoDAO.carregaAmigo(id);
+        return amigoDAO.carregaAmigoBD(id);
     }
 
     //Retorna o maior Id da nossa base de dados

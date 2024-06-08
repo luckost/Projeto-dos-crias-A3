@@ -1,10 +1,8 @@
-import dao.AmigoDAO;
-import dao.BDConnection;
-import dao.FerramentaDAO;
-import modelo.Amigos;
-import modelo.Emprestimos;
-import modelo.Ferramentas;
+package dao;
 
+import modelo.Amigo;
+import modelo.Emprestimo;
+import modelo.Ferramenta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +13,8 @@ import java.util.List;
 
 public class EmprestimoDAO {
 
-    public boolean inserirEmprestimoDB(Emprestimos emprestimo) {
-        String sql = "INSERT INTO emprestimos (ferramenta_id, amigo_id, data_emprestimo) VALUES (?, ?, ?)";
+    public boolean inserirEmprestimoBD(Emprestimo emprestimo) {
+        String sql = "INSERT INTO emprestimo (ferramenta_id, amigo_id, data_emprestimo) VALUES (?, ?, ?)";
         try (Connection connection = BDConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, emprestimo.getFerramenta().getId());
@@ -30,9 +28,9 @@ public class EmprestimoDAO {
         }
     }
 
-    public List<Emprestimos> carregarEmprestimos() {
-    List<Emprestimos> emprestimos = new ArrayList<>();
-    String sql = "SELECT * FROM emprestimos";
+    public List<Emprestimo> carregarEmprestimos() {
+    List<Emprestimo> emprestimos = new ArrayList<>();
+    String sql = "SELECT * FROM emprestimo";
     try (Connection connection = BDConnection.getConnection();
          PreparedStatement pstmt = connection.prepareStatement(sql);
          ResultSet rs = pstmt.executeQuery()) {
@@ -45,10 +43,10 @@ public class EmprestimoDAO {
             FerramentaDAO ferramentaDAO = new FerramentaDAO();
             AmigoDAO amigoDAO = new AmigoDAO();
 
-            Ferramentas ferramenta = ferramentaDAO.buscarFerramentaPorId(ferramentaId);
-            Amigos amigo = amigoDAO.buscarAmigoPorId(amigoId);
+            Ferramenta ferramenta = ferramentaDAO.buscarFerramentaPorId(ferramentaId);
+            Amigo amigo = amigoDAO.buscarAmigoPorId(amigoId);
 
-            Emprestimos emprestimo = new Emprestimos(id, ferramenta, amigo, (java.sql.Date) dataEmprestimo);
+            Emprestimo emprestimo = new Emprestimo(id, ferramenta, amigo, (java.sql.Date) dataEmprestimo);
             emprestimos.add(emprestimo);
         }
     } catch (SQLException e) {
@@ -58,8 +56,8 @@ public class EmprestimoDAO {
 }
 
 
-    public boolean removerEmprestimoDB(int id) {
-        String sql = "DELETE FROM emprestimos WHERE id = ?";
+    public boolean removerEmprestimoBD(int id) {
+        String sql = "DELETE FROM emprestimo WHERE id = ?";
         try (Connection connection = BDConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, id);

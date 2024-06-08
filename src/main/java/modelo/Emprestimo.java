@@ -12,14 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Emprestimos {
+public class Emprestimo {
     private int id;
-    private Ferramentas ferramenta;
-    private Amigos amigo;
+    private Ferramenta ferramenta;
+    private Amigo amigo;
     private Date dataEmprestimo;
     private Date dataDevolucao;
 
-    public Emprestimos(int id, Ferramentas ferramenta, Amigos amigo, Date dataEmprestimo) {
+    public Emprestimo(int id, Ferramenta ferramenta, Amigo amigo, Date dataEmprestimo) {
         this.id = id;
         this.ferramenta = ferramenta;
         this.amigo = amigo;
@@ -34,19 +34,19 @@ public class Emprestimos {
         this.id = id;
     }
 
-    public Ferramentas getFerramenta() {
+    public Ferramenta getFerramenta() {
         return ferramenta;
     }
 
-    public void setFerramenta(Ferramentas ferramenta) {
+    public void setFerramenta(Ferramenta ferramenta) {
         this.ferramenta = ferramenta;
     }
 
-    public Amigos getAmigo() {
+    public Amigo getAmigo() {
         return amigo;
     }
 
-    public void setAmigo(Amigos amigo) {
+    public void setAmigo(Amigo amigo) {
         this.amigo = amigo;
     }
 
@@ -77,8 +77,8 @@ public class Emprestimos {
                 '}';
     }
 
-    public static boolean inserirEmprestimoDB(Emprestimos emprestimo) {
-        String sql = "INSERT INTO emprestimos (id_ferramenta, id_amigo, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?)";
+    public static boolean inserirEmprestimoBD(Emprestimo emprestimo) {
+        String sql = "INSERT INTO emprestimo (id_ferramenta, id_amigo, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?)";
         try (Connection connection = BDConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, emprestimo.getFerramenta().getId());
@@ -93,8 +93,8 @@ public class Emprestimos {
         }
     }
 
-    public static boolean atualizarEmprestimoDB(Emprestimos emprestimo) {
-        String sql = "UPDATE emprestimos SET id_ferramenta = ?, id_amigo = ?, data_emprestimo = ?, data_devolucao = ? WHERE id = ?";
+    public static boolean atualizarEmprestimoBD(Emprestimo emprestimo) {
+        String sql = "UPDATE emprestimo SET id_ferramenta = ?, id_amigo = ?, data_emprestimo = ?, data_devolucao = ? WHERE id = ?";
         try (Connection connection = BDConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, emprestimo.getFerramenta().getId());
@@ -110,8 +110,8 @@ public class Emprestimos {
         }
     }
 
-    public static boolean deletarEmprestimoDB(int id) {
-        String sql = "DELETE FROM emprestimos WHERE id = ?";
+    public static boolean deletarEmprestimoBD(int id) {
+        String sql = "DELETE FROM emprestimo WHERE id = ?";
         try (Connection connection = BDConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, id);
@@ -123,9 +123,9 @@ public class Emprestimos {
         }
     }
 
-    public static List<Emprestimos> carregarEmprestimos() {
-    List<Emprestimos> emprestimos = new ArrayList<>();
-    String sql = "SELECT * FROM emprestimos";
+    public static List<Emprestimo> carregarEmprestimos() {
+    List<Emprestimo> emprestimos = new ArrayList<>();
+    String sql = "SELECT * FROM emprestimo";
     try (Connection connection = BDConnection.getConnection();
          PreparedStatement pstmt = connection.prepareStatement(sql);
          ResultSet rs = pstmt.executeQuery()) {
@@ -138,10 +138,10 @@ public class Emprestimos {
             FerramentaDAO ferramentaDAO = new FerramentaDAO();
             AmigoDAO amigoDAO = new AmigoDAO();
 
-            Ferramentas ferramenta = ferramentaDAO.buscarFerramentaPorId(ferramentaId);
-            Amigos amigo = amigoDAO.buscarAmigoPorId(amigoId);
+            Ferramenta ferramenta = ferramentaDAO.buscarFerramentaPorId(ferramentaId);
+            Amigo amigo = amigoDAO.buscarAmigoPorId(amigoId);
 
-            Emprestimos emprestimo = new Emprestimos(id, ferramenta, amigo, (java.sql.Date) dataEmprestimo);
+            Emprestimo emprestimo = new Emprestimo(id, ferramenta, amigo, (java.sql.Date) dataEmprestimo);
             emprestimos.add(emprestimo);
         }
     } catch (SQLException e) {

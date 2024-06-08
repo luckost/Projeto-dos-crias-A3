@@ -34,13 +34,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jTextNomeTab2" max="32767" attributes="0"/>
+                                  <Component id="JTFNomeTab2" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="JTextNumeroTab2" min="-2" pref="270" max="-2" attributes="0"/>
+                                      <Component id="JTFTelefoneTab2" min="-2" pref="270" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="JBCancelarTab2" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
@@ -72,12 +72,12 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="jTextNomeTab2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JTFNomeTab2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="JTextNumeroTab2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JTFTelefoneTab2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -104,12 +104,16 @@
               <Font name="Trebuchet MS" size="12" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="20">
+              <Table columnCount="3" rowCount="20">
+                <Column editable="true" title="Id" type="java.lang.Object"/>
                 <Column editable="true" title="Nome" type="java.lang.Object"/>
                 <Column editable="true" title="Telefone" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableAmigoMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -129,7 +133,7 @@
         <Property name="text" type="java.lang.String" value="Nome:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextNomeTab2">
+    <Component class="javax.swing.JTextField" name="JTFNomeTab2">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -139,7 +143,7 @@
         <Property name="text" type="java.lang.String" value="Telefone:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="JTextNumeroTab2">
+    <Component class="javax.swing.JTextField" name="JTFTelefoneTab2">
     </Component>
     <Component class="javax.swing.JButton" name="JBApagarTab2">
       <Properties>
@@ -151,6 +155,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Apagar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBApagarTab2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBCancelarTab2">
       <Properties>
@@ -173,6 +180,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBAlterarTab2ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
