@@ -4,7 +4,7 @@ import modelo.Ferramenta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import visao.Mensagens;
+
 
 public final class frmGerenciaFerramentas extends javax.swing.JFrame {
 
@@ -288,7 +288,18 @@ public final class frmGerenciaFerramentas extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFNomeTabActionPerformed
 
     private void jTableFerramentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFerramentasMouseClicked
-        // TODO add your handling code here: 
+    if (this.jTableFerramentas.getSelectedRow() != -1) {
+    String nome = this.jTableFerramentas.getValueAt(this.jTableFerramentas.getSelectedRow(), 1).toString();
+    String marca = this.jTableFerramentas.getValueAt(this.jTableFerramentas.getSelectedRow(), 2).toString();
+    String custo = this.jTableFerramentas.getValueAt(this.jTableFerramentas.getSelectedRow(), 3).toString();
+    // Aqui você pode obter o ID se precisar
+    // String id = this.jTableAmigo.getValueAt(this.jTableAmigo.getSelectedRow(), 0).toString();
+
+    this.JTFNomeTab.setText(nome);
+   this.JTFMarcaTab.setText(marca);
+   this.JTFCustoTab.setText(custo);
+
+}    // TODO add your handling code here: 
     }//GEN-LAST:event_jTableFerramentasMouseClicked
 
     public static void main(String args[]) {

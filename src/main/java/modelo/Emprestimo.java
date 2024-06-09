@@ -2,7 +2,6 @@ package modelo;
 
 import dao.EmprestimoDAO;
 import java.util.ArrayList;
-import java.sql.SQLException;
 import java.util.Date;
 
 public class Emprestimo {
@@ -12,21 +11,23 @@ public class Emprestimo {
     private String nomeFerramenta;
     private Date dataEmprestimo;
     private Date dataDevolucao;
+    private boolean status; // Alterado para boolean para representar "Entregue" ou "Aberto"
 
     // Construtor de Objeto Vazio
     public Emprestimo() {
-        this(0, "", "", new Date(), new Date());
+        this(0, "", "", new Date(), new Date(), false);
     }
 
     // Construtor de Objeto, com parâmetros
-    public Emprestimo(int id, String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao) {
+    public Emprestimo(int id, String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao, boolean status) {
         this.id = id;
         this.nomeAmigo = nomeAmigo;
         this.nomeFerramenta = nomeFerramenta;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
+        this.status = status;
     }
-
+  
     // Métodos GET e SET
     public int getId() {
         return id;
@@ -68,6 +69,14 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Emprestimo{" +
@@ -76,11 +85,10 @@ public class Emprestimo {
                 ", nomeFerramenta='" + nomeFerramenta + '\'' +
                 ", dataEmprestimo=" + dataEmprestimo +
                 ", dataDevolucao=" + dataDevolucao +
+                ", status='" + status + '\'' +
                 '}';
     }
 
-    /* Abaixo os métodos para uso junto com o DAO simulando a estrutura em camadas 
-    para usar com bancos de dados.*/
     // Retorna a Lista de Emprestimo(objetos)
     public ArrayList<Emprestimo> getMinhaLista() {
         EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
@@ -88,39 +96,35 @@ public class Emprestimo {
     }
 
     // Cadastra novo Emprestimo
-    public boolean inserirEmprestimoBD(String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao) throws SQLException {
+    public boolean inserirEmprestimoBD(String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao, boolean status) {
         EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
         int id = this.maiorID() + 1;
-        Emprestimo objeto = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao);
+        Emprestimo objeto = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao, status);
         return emprestimoDAO.inserirEmprestimoBD(objeto);
     }
 
     // Edita um Emprestimo específico pelo seu campo ID
-    public boolean updateEmprestimoBD(int id, String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao) {
+    public boolean updateEmprestimoBD(int id, String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao, boolean status) {
         EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-        Emprestimo objeto = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao);
-        return emprestimoDAO.atualizarEmprestimoBD(objeto);
+        Emprestimo objeto = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao, status);
+        return emprestimoDAO.updateEmprestimoBD(objeto);
     }
 
     // Deleta um Emprestimo específico pelo seu campo ID
     public boolean deleteEmprestimoBD(int id) {
         EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-        return emprestimoDAO.deletaEmprestimoBD(id);
+        return emprestimoDAO.deleteEmprestimoBD(id);
     }
 
-    // Carrega dados de um Emprestimo específico pelo seu Id
-    public Emprestimo carregaEmprestimoBD(int id) {
-        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-        return emprestimoDAO.carregaEmprestimoBD(id);
-    }
-
-    // Retorna o maior Id da nossa base de dados
-    public int maiorID() {
-        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-        return emprestimoDAO.pegaMaiorID();
-    }
-
-    public void setDataEmprestimo(String dataEmprestimo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    // Encontra o maior ID entre os empréstimos
+    private int maiorID() {
+        ArrayList<Emprestimo> lista = getMinhaLista();
+        int maior = 0;
+        for (Emprestimo emprestimo : lista) {
+            if (emprestimo.getId() > maior) {
+                maior = emprestimo.getId();
+            }
+        }
+        return maior;
     }
 }

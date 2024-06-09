@@ -41,8 +41,9 @@ public class EmprestimoDAO {
                 String nomeFerramenta = resposta.getString("nome_ferramenta");
                 Date dataEmprestimo = resposta.getDate("data_emprestimo");
                 Date dataDevolucao = resposta.getDate("data_devolucao");
+                boolean status = resposta.getBoolean("status");
 
-                Emprestimo objeto = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao);
+                Emprestimo objeto = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao, status);
                 lista.add(objeto);
             }
         } catch (SQLException ex) {
@@ -52,13 +53,14 @@ public class EmprestimoDAO {
     }
 
     public boolean inserirEmprestimoBD(Emprestimo objeto) {
-        String sql = "INSERT INTO Emprestimo(nome_amigo, nome_ferramenta, data_emprestimo, data_devolucao) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO emprestimo(nome_amigo, nome_ferramenta, data_emprestimo, data_devolucao, status) VALUES(?, ?, ?, ?, ?)";
         try (Connection conexaoBD = BDConnection.getConnection();
              PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
             stmt.setString(1, objeto.getNomeAmigo());
             stmt.setString(2, objeto.getNomeFerramenta());
             stmt.setDate(3, new java.sql.Date(objeto.getDataEmprestimo().getTime()));
             stmt.setDate(4, new java.sql.Date(objeto.getDataDevolucao().getTime()));
+            stmt.setBoolean(5, objeto.getStatus());
             stmt.executeUpdate();
             return true;
         } catch (SQLException erro) {
@@ -67,8 +69,8 @@ public class EmprestimoDAO {
         return false;
     }
 
-    public boolean deletaEmprestimoBD(int id) {
-        String sql = "DELETE FROM emprestimos WHERE id_emprestimo = ?";
+    public boolean deleteEmprestimoBD(int id) {
+        String sql = "DELETE FROM emprestimo WHERE id_emprestimo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
              PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -80,15 +82,16 @@ public class EmprestimoDAO {
         return false;
     }
 
-    public boolean atualizarEmprestimoBD(Emprestimo objeto) {
-        String sql = "UPDATE emprestimo SET nome_amigo = ?, nome_ferramenta = ?, data_emprestimo = ?, data_devolucao = ? WHERE id_emprestimo = ?";
+    public boolean updateEmprestimoBD(Emprestimo objeto) {
+        String sql = "UPDATE emprestimo SET nome_amigo = ?, nome_ferramenta = ?, data_emprestimo = ?, data_devolucao = ?, status = ? WHERE id_emprestimo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
              PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
             stmt.setString(1, objeto.getNomeAmigo());
             stmt.setString(2, objeto.getNomeFerramenta());
             stmt.setDate(3, new java.sql.Date(objeto.getDataEmprestimo().getTime()));
             stmt.setDate(4, new java.sql.Date(objeto.getDataDevolucao().getTime()));
-            stmt.setInt(5, objeto.getId());
+            stmt.setBoolean(5, objeto.getStatus());
+            stmt.setInt(6, objeto.getId());
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;
         } catch (SQLException erro) {
@@ -109,7 +112,8 @@ public class EmprestimoDAO {
                     String nomeFerramenta = resposta.getString("nome_ferramenta");
                     Date dataEmprestimo = resposta.getDate("data_emprestimo");
                     Date dataDevolucao = resposta.getDate("data_devolucao");
-                    return new Emprestimo(emprestimoId, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao);
+                    boolean status = resposta.getBoolean("status");
+                    return new Emprestimo(emprestimoId, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao, status);
                 }
             }
         } catch (SQLException erro) {
@@ -117,5 +121,4 @@ public class EmprestimoDAO {
         }
         return null;
     }
-    
 }
