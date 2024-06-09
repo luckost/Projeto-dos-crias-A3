@@ -4,17 +4,26 @@
  */
 package visao;
 
+import javax.swing.JOptionPane;
+import modelo.Emprestimo;
+import dao.EmprestimoDAO;
+import java.util.Date;
+
 /**
  *
  * @author legen
  */
-public class frmCadastroEmprestimos extends javax.swing.JFrame {
-
+public class frmCadastroEmprestimo extends javax.swing.JFrame {
+ 
+    private final Emprestimo objetoEmprestimo;
+    private final EmprestimoDAO emprestimoDAO;
     /**
      * Creates new form frmCadastroEmprestimos
      */
-    public frmCadastroEmprestimos() {
+  public frmCadastroEmprestimo (){
         initComponents();
+        this.objetoEmprestimo = new Emprestimo();
+        this.emprestimoDAO = new EmprestimoDAO();
     }
 
     /**
@@ -28,13 +37,13 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jNomeEmprestimo = new javax.swing.JTextField();
+        JTFNomeAmigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        JTFNomeFerramenta = new javax.swing.JTextField();
         JBCadastrar3 = new javax.swing.JButton();
         JBCancelar2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        JTFDataEmprestimo = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Emprestimos");
@@ -50,21 +59,15 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         jLabel4.setText("Nome: ");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(10, 100, 50, 18);
-
-        jNomeEmprestimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNomeEmprestimoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jNomeEmprestimo);
-        jNomeEmprestimo.setBounds(60, 100, 250, 22);
+        getContentPane().add(JTFNomeAmigo);
+        JTFNomeAmigo.setBounds(60, 100, 250, 26);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel1.setText("Ferramentas:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 180, 100, 18);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(110, 180, 210, 22);
+        getContentPane().add(JTFNomeFerramenta);
+        JTFNomeFerramenta.setBounds(110, 180, 210, 26);
 
         JBCadastrar3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         JBCadastrar3.setForeground(new java.awt.Color(51, 255, 51));
@@ -92,18 +95,65 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
         jLabel5.setText("Data de Emprestimo:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(330, 100, 140, 18);
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(470, 100, 110, 22);
+        getContentPane().add(JTFDataEmprestimo);
+        JTFDataEmprestimo.setBounds(470, 100, 110, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jNomeEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNomeEmprestimoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jNomeEmprestimoActionPerformed
-
     private void JBCadastrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrar3ActionPerformed
-        // TODO add your handling code here:
+   try {
+    String nome_amigo = "";
+    String nome_ferramenta = "";
+    Date dataEmprestimo = null;
+
+    if (this.JTFNomeAmigo.getText().length() < 2) {
+        throw new Mensagens("Nome do amigo deve conter ao menos 2 caracteres.");
+    } else {
+        nome_amigo = this.JTFNomeAmigo.getText();
+    }
+
+    if (this.JTFNomeFerramenta.getText().length() < 2) {
+        throw new Mensagens("Nome da ferramenta deve conter ao menos 2 caracteres.");
+    } else {
+        nome_ferramenta = this.JTFNomeFerramenta.getText();
+    }
+
+    // Observe que aqui você precisa converter o texto da data para um objeto Date
+    // dependendo do formato que você está usando. Vou presumir que você está usando um JDateChooser.
+    if (this.JTFDataEmprestimo.getDate() == null) {
+        throw new Mensagens("Selecione uma data de empréstimo válida.");
+    } else {
+        dataEmprestimo = this.JTFDataEmprestimo.getDate();
+    }
+
+    // Cria um novo objeto Emprestimo e define seus atributos
+    Emprestimo novoEmprestimo = new Emprestimo();
+    novoEmprestimo.setNomeAmigo(nome_amigo);
+    novoEmprestimo.setNomeFerramenta(nome_ferramenta);
+    novoEmprestimo.setDataEmprestimo(dataEmprestimo);
+
+    EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+    boolean inserido = emprestimoDAO.inserirEmprestimoBD(novoEmprestimo);
+
+    if (inserido) {
+        JOptionPane.showMessageDialog(null, "Empréstimo cadastrado com sucesso!");
+        // Limpa campos da interface
+        this.JTFNomeAmigo.setText("");
+        this.JTFNomeFerramenta.setText("");
+        this.JTFDataEmprestimo.setDate(null); // Limpa a data
+    } else {
+        JOptionPane.showMessageDialog(null, "Erro ao cadastrar empréstimo.");
+    }
+    // Exibindo no console o empréstimo cadastrado
+    System.out.println(novoEmprestimo.getMinhaLista().toString());
+} catch (Mensagens erro) {
+    JOptionPane.showMessageDialog(null, erro.getMessage());
+} catch (NumberFormatException erro2) {
+    JOptionPane.showMessageDialog(null, "Informe um número válido.");
+}
+   
+// TODO add your handling code here:
     }//GEN-LAST:event_JBCadastrar3ActionPerformed
 
     private void JBCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelar2ActionPerformed
@@ -127,20 +177,21 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCadastroEmprestimos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCadastroEmprestimos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCadastroEmprestimos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCadastroEmprestimos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmCadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmCadastroEmprestimos().setVisible(true);
+                new frmCadastroEmprestimo().setVisible(true);
             }
         });
     }
@@ -148,12 +199,12 @@ public class frmCadastroEmprestimos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar3;
     private javax.swing.JButton JBCancelar2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser JTFDataEmprestimo;
+    private javax.swing.JTextField JTFNomeAmigo;
+    private javax.swing.JTextField JTFNomeFerramenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jNomeEmprestimo;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

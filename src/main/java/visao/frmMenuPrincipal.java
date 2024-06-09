@@ -153,8 +153,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCadastroFerramentaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        frmGerenciaFerramenta objeto = new frmGerenciaFerramenta();
-        objeto.setVisible(true);        // TODO add your handling code here:
+        frmGerenciaFerramentas objeto = new frmGerenciaFerramentas();
+        objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -178,7 +178,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemGerenciaEmprestimoActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-  frmCadastroEmprestimos objeto = new frmCadastroEmprestimos();
+  frmCadastroEmprestimo objeto = new frmCadastroEmprestimo();
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

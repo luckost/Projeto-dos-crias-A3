@@ -11,7 +11,9 @@ public class Ferramenta {
     private double custo;
 
     // Construtor vazio
-    public Ferramenta() {}
+    public Ferramenta() {
+    this(0, "", "",0.0);
+    }
 
     // Construtor com parâmetros
     public Ferramenta(int id, String nome, String marca, double custo) {

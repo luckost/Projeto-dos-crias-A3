@@ -46,13 +46,13 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
 
         jTableEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Amigo", "Ferramentas", "Data do Emprestimo", "Devoluçao"
+                "Id", "Amigo", "Ferramenta", "Data do Emprestimo", "Devolução"
             }
         ));
         jTableEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -1,31 +1,33 @@
 package modelo;
 
-import dao.BDConnection;
-import dao.FerramentaDAO;
-import dao.AmigoDAO;
-
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import dao.EmprestimoDAO;
 import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.Date;
 
 public class Emprestimo {
+    // Atributos
     private int id;
-    private Ferramenta ferramenta;
-    private Amigo amigo;
+    private String nomeAmigo;
+    private String nomeFerramenta;
     private Date dataEmprestimo;
     private Date dataDevolucao;
 
-    public Emprestimo(int id, Ferramenta ferramenta, Amigo amigo, Date dataEmprestimo) {
-        this.id = id;
-        this.ferramenta = ferramenta;
-        this.amigo = amigo;
-        this.dataEmprestimo = dataEmprestimo;
+    // Construtor de Objeto Vazio
+    public Emprestimo() {
+        this(0, "", "", new Date(), new Date());
     }
 
+    // Construtor de Objeto, com parâmetros
+    public Emprestimo(int id, String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao) {
+        this.id = id;
+        this.nomeAmigo = nomeAmigo;
+        this.nomeFerramenta = nomeFerramenta;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    // Métodos GET e SET
     public int getId() {
         return id;
     }
@@ -34,20 +36,20 @@ public class Emprestimo {
         this.id = id;
     }
 
-    public Ferramenta getFerramenta() {
-        return ferramenta;
+    public String getNomeAmigo() {
+        return nomeAmigo;
     }
 
-    public void setFerramenta(Ferramenta ferramenta) {
-        this.ferramenta = ferramenta;
+    public void setNomeAmigo(String nomeAmigo) {
+        this.nomeAmigo = nomeAmigo;
     }
 
-    public Amigo getAmigo() {
-        return amigo;
+    public String getNomeFerramenta() {
+        return nomeFerramenta;
     }
 
-    public void setAmigo(Amigo amigo) {
-        this.amigo = amigo;
+    public void setNomeFerramenta(String nomeFerramenta) {
+        this.nomeFerramenta = nomeFerramenta;
     }
 
     public Date getDataEmprestimo() {
@@ -68,87 +70,57 @@ public class Emprestimo {
 
     @Override
     public String toString() {
-        return "Emprestimos{" +
+        return "Emprestimo{" +
                 "id=" + id +
-                ", ferramenta=" + ferramenta +
-                ", amigo=" + amigo +
+                ", nomeAmigo='" + nomeAmigo + '\'' +
+                ", nomeFerramenta='" + nomeFerramenta + '\'' +
                 ", dataEmprestimo=" + dataEmprestimo +
                 ", dataDevolucao=" + dataDevolucao +
                 '}';
     }
 
-    public static boolean inserirEmprestimoBD(Emprestimo emprestimo) {
-        String sql = "INSERT INTO emprestimo (id_ferramenta, id_amigo, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?)";
-        try (Connection connection = BDConnection.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, emprestimo.getFerramenta().getId());
-            pstmt.setInt(2, emprestimo.getAmigo().getId());
-            pstmt.setDate(3, new java.sql.Date(emprestimo.getDataEmprestimo().getTime()));
-            pstmt.setDate(4, emprestimo.getDataDevolucao() != null ? new java.sql.Date(emprestimo.getDataDevolucao().getTime()) : null);
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Erro ao inserir empréstimo: " + e.getMessage());
-            return false;
-        }
+    /* Abaixo os métodos para uso junto com o DAO simulando a estrutura em camadas 
+    para usar com bancos de dados.*/
+    // Retorna a Lista de Emprestimo(objetos)
+    public ArrayList<Emprestimo> getMinhaLista() {
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+        return emprestimoDAO.getMinhaLista();
     }
 
-    public static boolean atualizarEmprestimoBD(Emprestimo emprestimo) {
-        String sql = "UPDATE emprestimo SET id_ferramenta = ?, id_amigo = ?, data_emprestimo = ?, data_devolucao = ? WHERE id = ?";
-        try (Connection connection = BDConnection.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, emprestimo.getFerramenta().getId());
-            pstmt.setInt(2, emprestimo.getAmigo().getId());
-            pstmt.setDate(3, new java.sql.Date(emprestimo.getDataEmprestimo().getTime()));
-            pstmt.setDate(4, emprestimo.getDataDevolucao() != null ? new java.sql.Date(emprestimo.getDataDevolucao().getTime()) : null);
-            pstmt.setInt(5, emprestimo.getId());
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Erro ao atualizar empréstimo: " + e.getMessage());
-            return false;
-        }
+    // Cadastra novo Emprestimo
+    public boolean inserirEmprestimoBD(String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao) throws SQLException {
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+        int id = this.maiorID() + 1;
+        Emprestimo objeto = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao);
+        return emprestimoDAO.inserirEmprestimoBD(objeto);
     }
 
-    public static boolean deletarEmprestimoBD(int id) {
-        String sql = "DELETE FROM emprestimo WHERE id = ?";
-        try (Connection connection = BDConnection.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Erro ao deletar empréstimo: " + e.getMessage());
-            return false;
-        }
+    // Edita um Emprestimo específico pelo seu campo ID
+    public boolean updateEmprestimoBD(int id, String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao) {
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+        Emprestimo objeto = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao);
+        return emprestimoDAO.atualizarEmprestimoBD(objeto);
     }
 
-    public static List<Emprestimo> carregarEmprestimos() {
-    List<Emprestimo> emprestimos = new ArrayList<>();
-    String sql = "SELECT * FROM emprestimo";
-    try (Connection connection = BDConnection.getConnection();
-         PreparedStatement pstmt = connection.prepareStatement(sql);
-         ResultSet rs = pstmt.executeQuery()) {
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            Date dataEmprestimo = rs.getDate("data_emprestimo");
-            int ferramentaId = rs.getInt("ferramenta_id");
-            int amigoId = rs.getInt("amigo_id");
-
-            FerramentaDAO ferramentaDAO = new FerramentaDAO();
-            AmigoDAO amigoDAO = new AmigoDAO();
-
-            Ferramenta ferramenta = ferramentaDAO.buscarFerramentaPorId(ferramentaId);
-            Amigo amigo = amigoDAO.buscarAmigoPorId(amigoId);
-
-            Emprestimo emprestimo = new Emprestimo(id, ferramenta, amigo, (java.sql.Date) dataEmprestimo);
-            emprestimos.add(emprestimo);
-        }
-    } catch (SQLException e) {
-        System.err.println("Erro ao carregar empréstimos: " + e.getMessage());
+    // Deleta um Emprestimo específico pelo seu campo ID
+    public boolean deleteEmprestimoBD(int id) {
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+        return emprestimoDAO.deletaEmprestimoBD(id);
     }
-    return emprestimos;
+
+    // Carrega dados de um Emprestimo específico pelo seu Id
+    public Emprestimo carregaEmprestimoBD(int id) {
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+        return emprestimoDAO.carregaEmprestimoBD(id);
+    }
+
+    // Retorna o maior Id da nossa base de dados
+    public int maiorID() {
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+        return emprestimoDAO.pegaMaiorID();
+    }
+
+    public void setDataEmprestimo(String dataEmprestimo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
-
-    }
-
