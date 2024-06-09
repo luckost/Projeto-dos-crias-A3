@@ -52,15 +52,18 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jNomeFerramenta = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JBAlterar = new javax.swing.JButton();
-        JBApagar = new javax.swing.JButton();
         jDateEmprestimo = new com.toedter.calendar.JDateChooser();
         jDateDevolucao = new com.toedter.calendar.JDateChooser();
-        JBCancelar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         JStatus = new javax.swing.JCheckBox();
+        JBAlterar = new javax.swing.JButton();
+        JBApagar = new javax.swing.JButton();
+        JBCancelar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Emprestimos");
+        setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(600, 365));
         getContentPane().setLayout(null);
 
@@ -83,76 +86,97 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(JTableEmprestimo);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(6, 6, 572, 107);
+        jScrollPane1.setBounds(16, 13, 610, 100);
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nome: ");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(10, 150, 50, 18);
         getContentPane().add(jNomeEmprestimo);
-        jNomeEmprestimo.setBounds(60, 150, 250, 26);
+        jNomeEmprestimo.setBounds(60, 150, 250, 22);
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Data de Emprestimo:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(330, 150, 140, 18);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ferramentas:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 210, 100, 18);
         getContentPane().add(jNomeFerramenta);
-        jNomeFerramenta.setBounds(110, 210, 210, 26);
+        jNomeFerramenta.setBounds(110, 210, 210, 22);
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Data de Devoluçao:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(330, 210, 140, 18);
-
-        JBAlterar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        JBAlterar.setForeground(new java.awt.Color(51, 255, 51));
-        JBAlterar.setText("Alterar");
-        JBAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBAlterarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(JBAlterar);
-        JBAlterar.setBounds(320, 270, 110, 40);
-
-        JBApagar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        JBApagar.setForeground(new java.awt.Color(255, 0, 0));
-        JBApagar.setText("Apagar");
-        JBApagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBApagarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(JBApagar);
-        JBApagar.setBounds(180, 270, 110, 40);
         getContentPane().add(jDateEmprestimo);
-        jDateEmprestimo.setBounds(470, 150, 100, 26);
+        jDateEmprestimo.setBounds(470, 150, 100, 22);
         getContentPane().add(jDateDevolucao);
-        jDateDevolucao.setBounds(460, 210, 110, 26);
+        jDateDevolucao.setBounds(460, 210, 110, 22);
 
-        JBCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        JBCancelar.setText("Cancelar");
-        JBCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBCancelarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(JBCancelar);
-        JBCancelar.setBounds(40, 270, 100, 40);
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setForeground(new java.awt.Color(0, 102, 102));
+        jPanel1.setLayout(null);
 
+        JStatus.setForeground(new java.awt.Color(255, 255, 255));
         JStatus.setText("Entregue");
         JStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JStatusActionPerformed(evt);
             }
         });
-        getContentPane().add(JStatus);
-        JStatus.setBounds(470, 280, 72, 20);
+        jPanel1.add(JStatus);
+        JStatus.setBounds(450, 230, 70, 20);
+
+        JBAlterar.setBackground(new java.awt.Color(0, 255, 0));
+        JBAlterar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        JBAlterar.setForeground(new java.awt.Color(255, 255, 255));
+        JBAlterar.setText("Alterar");
+        JBAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBAlterarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(JBAlterar);
+        JBAlterar.setBounds(390, 260, 110, 40);
+
+        JBApagar.setBackground(new java.awt.Color(255, 0, 0));
+        JBApagar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        JBApagar.setForeground(new java.awt.Color(255, 255, 255));
+        JBApagar.setText("Apagar");
+        JBApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBApagarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(JBApagar);
+        JBApagar.setBounds(230, 260, 110, 40);
+
+        JBCancelar.setBackground(new java.awt.Color(255, 153, 0));
+        JBCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JBCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        JBCancelar.setText("Voltar");
+        JBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(JBCancelar);
+        JBCancelar.setBounds(80, 260, 100, 40);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 10, 620, 310);
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setLayout(null);
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(0, -30, 650, 360);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -313,6 +337,8 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jNomeEmprestimo;
     private javax.swing.JTextField jNomeFerramenta;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
