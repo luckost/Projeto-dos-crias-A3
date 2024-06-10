@@ -5,6 +5,7 @@ import modelo.Emprestimo;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class frmRelatorioEmprestimos extends javax.swing.JFrame {
 
@@ -26,6 +27,8 @@ public class frmRelatorioEmprestimos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
 
@@ -88,6 +91,14 @@ public class frmRelatorioEmprestimos extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 0));
         jLabel2.setText("00");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Premio de pidao vai para ...");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel5.setText("nome do amigo");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -95,15 +106,21 @@ public class frmRelatorioEmprestimos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -114,9 +131,13 @@ public class frmRelatorioEmprestimos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -149,27 +170,47 @@ public class frmRelatorioEmprestimos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private void carregarDadosTabela() {
+  private void carregarDadosTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0); // Limpa a tabela antes de adicionar novos dados
 
         Emprestimo emprestimo = new Emprestimo();
         ArrayList<Emprestimo> listaEmprestimos = emprestimo.getMinhaLista();
 
+        // HashMap para armazenar a contagem de empréstimos por amigo
+        HashMap<String, Integer> contagemEmprestimosPorAmigo = new HashMap<>();
+
+        // Variáveis para armazenar o amigo com o maior número de empréstimos
+        String amigoComMaisEmprestimos = "";
+        int maxEmprestimos = 0;
+
         for (Emprestimo e : listaEmprestimos) {
             Object[] rowData = {
-                e.getId(),
-                e.getNomeAmigo(),
-                e.getNomeFerramenta(),
-                e.getDataEmprestimo(),
-                e.getDataDevolucao(),
-                e.getStatus() ? "Entregue" : "Aberto"
+                    e.getId(),
+                    e.getNomeAmigo(),
+                    e.getNomeFerramenta(),
+                    e.getDataEmprestimo(),
+                    e.getDataDevolucao(),
+                    e.getStatus() ? "Entregue" : "Aberto"
             };
             modelo.addRow(rowData);
+
+            // Atualizar a contagem de empréstimos para o amigo atual
+            int count = contagemEmprestimosPorAmigo.getOrDefault(e.getNomeAmigo(), 0) + 1;
+            contagemEmprestimosPorAmigo.put(e.getNomeAmigo(), count);
+
+            // Atualizar o amigo com o maior número de empréstimos
+            if (count > maxEmprestimos) {
+                amigoComMaisEmprestimos = e.getNomeAmigo();
+                maxEmprestimos = count;
+            }
         }
 
         // Atualiza o total de empréstimos
         jLabel2.setText(String.valueOf(listaEmprestimos.size()));
+
+        // Atualiza o nome do amigo com mais empréstimos
+        jLabel5.setText(amigoComMaisEmprestimos);
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       this.dispose();        // TODO add your handling code here:
@@ -188,6 +229,8 @@ private void carregarDadosTabela() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
