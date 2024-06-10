@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 public class frmGerenciaEmprestimos extends javax.swing.JFrame {
  
   private Emprestimo objetoEmprestimo;
@@ -59,6 +60,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         JBAlterar = new javax.swing.JButton();
         JBApagar = new javax.swing.JButton();
         JBCancelar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,7 +96,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(10, 150, 50, 18);
         getContentPane().add(jNomeEmprestimo);
-        jNomeEmprestimo.setBounds(60, 150, 250, 22);
+        jNomeEmprestimo.setBounds(60, 150, 250, 26);
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,7 +110,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 210, 100, 18);
         getContentPane().add(jNomeFerramenta);
-        jNomeFerramenta.setBounds(110, 210, 210, 22);
+        jNomeFerramenta.setBounds(110, 210, 210, 26);
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,9 +118,9 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(330, 210, 140, 18);
         getContentPane().add(jDateEmprestimo);
-        jDateEmprestimo.setBounds(470, 150, 100, 22);
+        jDateEmprestimo.setBounds(470, 150, 100, 26);
         getContentPane().add(jDateDevolucao);
-        jDateDevolucao.setBounds(460, 210, 110, 22);
+        jDateDevolucao.setBounds(460, 210, 110, 26);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setForeground(new java.awt.Color(0, 102, 102));
@@ -132,19 +134,19 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JStatus);
-        JStatus.setBounds(450, 230, 70, 20);
+        JStatus.setBounds(470, 230, 72, 20);
 
         JBAlterar.setBackground(new java.awt.Color(0, 255, 0));
         JBAlterar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         JBAlterar.setForeground(new java.awt.Color(255, 255, 255));
-        JBAlterar.setText("Alterar");
+        JBAlterar.setText("Atualizar");
         JBAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBAlterarActionPerformed(evt);
             }
         });
         jPanel1.add(JBAlterar);
-        JBAlterar.setBounds(390, 260, 110, 40);
+        JBAlterar.setBounds(300, 260, 110, 40);
 
         JBApagar.setBackground(new java.awt.Color(255, 0, 0));
         JBApagar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -156,7 +158,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JBApagar);
-        JBApagar.setBounds(230, 260, 110, 40);
+        JBApagar.setBounds(170, 260, 110, 40);
 
         JBCancelar.setBackground(new java.awt.Color(255, 153, 0));
         JBCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -168,7 +170,11 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JBCancelar);
-        JBCancelar.setBounds(80, 260, 100, 40);
+        JBCancelar.setBounds(30, 260, 100, 40);
+
+        jButton1.setText("Concluído");
+        jPanel1.add(jButton1);
+        jButton1.setBounds(430, 260, 110, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 10, 620, 310);
@@ -329,6 +335,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     private javax.swing.JButton JBCancelar;
     private javax.swing.JCheckBox JStatus;
     private javax.swing.JTable JTableEmprestimo;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateDevolucao;
     private com.toedter.calendar.JDateChooser jDateEmprestimo;
     private javax.swing.JLabel jLabel1;
