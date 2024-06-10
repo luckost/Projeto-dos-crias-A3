@@ -3,6 +3,7 @@ package dao;
 import modelo.Emprestimo;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -120,5 +121,48 @@ public class EmprestimoDAO {
             LOGGER.log(Level.SEVERE, "Erro ao carregar empréstimo", erro);
         }
         return null;
+    }
+
+ public List<Emprestimo> listarEmprestimosInativosPorAmigo(String nomeAmigo) {
+    List<Emprestimo> emprestimosInativosPorAmigo = new ArrayList<>();
+    String sql = "SELECT * FROM emprestimo WHERE nome_amigo = ? AND status = false";
+    try (Connection conexaoBD = BDConnection.getConnection();
+         PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
+        stmt.setString(1, nomeAmigo);
+        try (ResultSet resposta = stmt.executeQuery()) {
+            while (resposta.next()) {
+                int id = resposta.getInt("id_emprestimo");
+                String nomeFerramenta = resposta.getString("nome_ferramenta");
+                Date dataEmprestimo = resposta.getDate("data_emprestimo");
+                boolean status = resposta.getBoolean("status");
+                Emprestimo emprestimo = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, null, status);
+                emprestimosInativosPorAmigo.add(emprestimo);
+            }
+        }
+    } catch (SQLException ex) {
+        LOGGER.log(Level.SEVERE, "Erro ao listar empréstimos inativos por amigo", ex);
+    }
+    return emprestimosInativosPorAmigo;
+}
+
+
+    public List<Emprestimo> listarEmprestimosAtivos() {
+        List<Emprestimo> emprestimosAtivos = new ArrayList<>();
+        String sql = "SELECT * FROM emprestimo WHERE status = true AND data_devolucao IS NULL";
+        try (Connection conexaoBD = BDConnection.getConnection();
+             PreparedStatement stmt = conexaoBD.prepareStatement(sql);
+             ResultSet resposta = stmt.executeQuery()) {
+            while (resposta.next()) {
+                int id = resposta.getInt("id_emprestimo");
+                String nomeAmigo = resposta.getString("nome_amigo");
+                String nomeFerramenta = resposta.getString("nome_ferramenta");
+                Date dataEmprestimo = resposta.getDate("data_emprestimo");
+                Emprestimo emprestimo = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, null, true);
+                emprestimosAtivos.add(emprestimo);
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Erro ao listar empréstimos ativos", ex);
+        }
+        return emprestimosAtivos;
     }
 }

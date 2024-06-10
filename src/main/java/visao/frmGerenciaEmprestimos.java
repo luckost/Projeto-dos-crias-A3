@@ -1,6 +1,7 @@
 
 package visao;
 
+import dao.EmprestimoDAO;
 import modelo.Emprestimo;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -11,7 +12,9 @@ import java.util.Date;
 public class frmGerenciaEmprestimos extends javax.swing.JFrame {
  
   private Emprestimo objetoEmprestimo;
+  private EmprestimoDAO emprestimoDAO;
     private SimpleDateFormat dateFormat;
+
 
     /**
      * Creates new form frmGerenciaEmprestimo
@@ -19,17 +22,18 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     public frmGerenciaEmprestimos() {
         initComponents();
         this.objetoEmprestimo = new Emprestimo();
+        this.emprestimoDAO = new EmprestimoDAO(); // Adicionando inicialização do emprestimoDAO
         this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        this.carregaTabela();
+        this.carregaTabelaInativosPorAmigo("Nome do Amigo"); // Passando um nome de amigo "fixo"
     }
 
-   public void carregaTabela() {
+   public void carregaTabelaInativosPorAmigo(String nomeAmigo) {
         DefaultTableModel modelo = (DefaultTableModel) this.JTableEmprestimo.getModel();
         modelo.setNumRows(0);
 
-        ArrayList<Emprestimo> listaEmprestimos = objetoEmprestimo.getMinhaLista();
+        ArrayList<Emprestimo> listaEmprestimosInativos = this.objetoEmprestimo.listarEmprestimosInativosPorAmigo(nomeAmigo);
 
-        for (Emprestimo emprestimo : listaEmprestimos) {
+        for (Emprestimo emprestimo : listaEmprestimosInativos) {
             modelo.addRow(new Object[]{
                 emprestimo.getId(),
                 emprestimo.getNomeAmigo(),
@@ -188,7 +192,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAlterarActionPerformed
-   try {
+  try {
             int id = 0;
             String nomeAmigo = "";
             String nomeFerramenta = "";
@@ -206,7 +210,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             nomeFerramenta = this.jNomeFerramenta.getText();
             dataEmprestimo = this.jDateEmprestimo.getDate();
             dataDevolucao = this.jDateDevolucao.getDate();
-            status = this.JStatus.isSelected(); // Alteração feita aqui
+            status = this.JStatus.isSelected();
 
             if (this.objetoEmprestimo.updateEmprestimoBD(id, nomeAmigo, nomeFerramenta, dataEmprestimo, dataDevolucao, status)) {
                 this.jNomeEmprestimo.setText("");
@@ -217,50 +221,50 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Empréstimo alterado com sucesso!");
             }
 
-            System.out.println(this.objetoEmprestimo.getMinhaLista().toString());
+            carregaTabelaInativosPorAmigo(nomeAmigo);
         } catch (Mensagens erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
-        } finally {
-            carregaTabela();
         }
+    
     
     // TODO add your handling code here:
     }//GEN-LAST:event_JBAlterarActionPerformed
 
     private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
-    try {
-            int id = 0;
-            if (this.JTableEmprestimo.getSelectedRow() == -1) {
-                throw new Mensagens("Primeiro selecione um empréstimo para apagar.");
-            } else {
-                id = Integer.parseInt(this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 0).toString());
-            }
-
-            int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar este empréstimo?");
-            if (respostaUsuario == 0) { // Clicou em SIM
-                if (this.objetoEmprestimo.deleteEmprestimoBD(id)) {
-                    JOptionPane.showMessageDialog(rootPane, "Empréstimo apagado com sucesso!");
-                }
-            }
-
-            System.out.println(this.objetoEmprestimo.getMinhaLista().toString());
-        } catch (Mensagens erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
-        } finally {
-            carregaTabela();
+     try {
+        int id = 0;
+        if (this.JTableEmprestimo.getSelectedRow() == -1) {
+            throw new Mensagens("Primeiro selecione um empréstimo para apagar.");
+        } else {
+            id = Integer.parseInt(this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 0).toString());
         }
+
+        String nomeAmigo = this.jNomeEmprestimo.getText(); // Aqui obtenha o nome do amigo
+
+        int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar este empréstimo?");
+        if (respostaUsuario == 0) {
+            if (this.objetoEmprestimo.deleteEmprestimoBD(id)) {
+                JOptionPane.showMessageDialog(rootPane, "Empréstimo apagado com sucesso!");
+            }
+        }
+
+        carregaTabelaInativosPorAmigo(nomeAmigo); // Utilize a variável nomeAmigo
+    } catch (Mensagens erro) {
+        JOptionPane.showMessageDialog(null, erro.getMessage());
+    }
+        
    // TODO add your handling code here:
     }//GEN-LAST:event_JBApagarActionPerformed
 
     private void JTableEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableEmprestimoMouseClicked
-    if (this.JTableEmprestimo.getSelectedRow() != -1) {
+     if (this.JTableEmprestimo.getSelectedRow() != -1) {
             String nomeAmigo = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 1).toString();
             String nomeFerramenta = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 2).toString();
             String dataEmprestimoStr = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 3).toString();
             String dataDevolucaoStr = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 4).toString();
-            boolean status = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 5).toString().equals("Entregue"); // Alteração feita aqui
+            boolean status = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 5).toString().equals("Entregue");
 
             Date dataEmprestimo = null;
             Date dataDevolucao = null;
@@ -275,8 +279,9 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             this.jNomeFerramenta.setText(nomeFerramenta);
             this.jDateEmprestimo.setDate(dataEmprestimo);
             this.jDateDevolucao.setDate(dataDevolucao);
-            this.JStatus.setSelected(status); // Alteração feita aqui
-        }                    
+            this.JStatus.setSelected(status);
+        }
+    
         // TODO add your handling code here:
     }//GEN-LAST:event_JTableEmprestimoMouseClicked
 

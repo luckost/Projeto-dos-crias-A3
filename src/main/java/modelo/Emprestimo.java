@@ -94,7 +94,10 @@ public class Emprestimo {
         EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
         return emprestimoDAO.getMinhaLista();
     }
-
+    public ArrayList<Emprestimo> listarEmprestimosInativosPorAmigo(String nomeAmigo) {
+    EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+    return (ArrayList<Emprestimo>) emprestimoDAO.listarEmprestimosInativosPorAmigo(nomeAmigo);
+}
     // Cadastra novo Emprestimo
     public boolean inserirEmprestimoBD(String nomeAmigo, String nomeFerramenta, Date dataEmprestimo, Date dataDevolucao, boolean status) {
         EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
