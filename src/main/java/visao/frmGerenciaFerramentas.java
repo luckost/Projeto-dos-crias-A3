@@ -4,19 +4,27 @@ import modelo.Ferramenta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-
+/**
+ * Classe para gerenciar a interface gráfica de ferramentas.
+ * Esta classe permite a visualização, alteração e exclusão de ferramentas em uma tabela.
+ */
 public final class frmGerenciaFerramentas extends javax.swing.JFrame {
 
     private final Ferramenta objetoferramenta;
-
+ /**
+     * Construtor da classe frmGerenciaFerramentas.
+     * Inicializa os componentes e carrega a tabela de ferramentas.
+     */
     public frmGerenciaFerramentas() {
         initComponents();
         this.objetoferramenta = new Ferramenta();
         this.carregaTabela();
         
     }
-
+/**
+     * Carrega os dados da tabela de ferramentas.
+     * Obtém a lista de ferramentas e preenche a tabela com seus dados.
+     */
     public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableFerramentas.getModel();
         modelo.setNumRows(0); // Limpa a tabela
@@ -200,11 +208,19 @@ public final class frmGerenciaFerramentas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ /**
+     * Método para tratar o evento do botão "Voltar".
+     * Fecha a janela atual.
+     * @param evt Evento de clique no botão "Voltar".
+     */
     private void JBCancelarTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarTabActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBCancelarTabActionPerformed
-
+ /**
+     * Método para tratar o evento do botão "Apagar".
+     * Exclui a ferramenta selecionada na tabela após confirmação do usuário.
+     * @param evt Evento de clique no botão "Apagar".
+     */
     private void JBApagarTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarTabActionPerformed
         int selectedRow = jTableFerramentas.getSelectedRow();
         if (selectedRow >= 0) {
@@ -224,7 +240,11 @@ public final class frmGerenciaFerramentas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione uma ferramenta para remover.");
         }
     }//GEN-LAST:event_JBApagarTabActionPerformed
-
+/**
+     * Método para tratar o evento do botão "Alterar".
+     * Atualiza os dados da ferramenta selecionada na tabela.
+     * @param evt Evento de clique no botão "Alterar".
+     */
     private void JBAlterarTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAlterarTabActionPerformed
         try {
             // Recebendo e validando dados da interface gráfica.
@@ -280,7 +300,11 @@ public final class frmGerenciaFerramentas extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_JTFNomeTabActionPerformed
-
+ /**
+     * Método para tratar o evento de clique na tabela de ferramentas.
+     * Preenche os campos do formulário com os dados da ferramenta selecionada.
+     * @param evt Evento de clique na tabela de ferramentas.
+     */
     private void jTableFerramentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFerramentasMouseClicked
     if (this.jTableFerramentas.getSelectedRow() != -1) {
     String nome = this.jTableFerramentas.getValueAt(this.jTableFerramentas.getSelectedRow(), 1).toString();
@@ -293,7 +317,7 @@ public final class frmGerenciaFerramentas extends javax.swing.JFrame {
    this.JTFMarcaTab.setText(marca);
    this.JTFCustoTab.setText(custo);
 
-}    // TODO add your handling code here: 
+}    
     }//GEN-LAST:event_jTableFerramentasMouseClicked
 
     public static void main(String args[]) {

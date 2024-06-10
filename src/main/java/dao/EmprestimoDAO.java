@@ -7,14 +7,24 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Esta classe fornece métodos para acessar e manipular dados relacionados a empréstimos no banco de dados.
+ */
 public class EmprestimoDAO {
     private final BDConnection connectionBD;
     private static final Logger LOGGER = Logger.getLogger(EmprestimoDAO.class.getName());
 
+    /**
+     * Construtor da classe EmprestimoDAO.
+     */
     public EmprestimoDAO() {
         this.connectionBD = new BDConnection();
     }
 
+    /**
+     * Obtém o maior ID de empréstimo presente no banco de dados.
+     * @return O maior ID de empréstimo.
+     */
     public int pegaMaiorID() {
         int maior = 0;
         String sql = "SELECT MAX(id_emprestimo) as id_emprestimo FROM emprestimo";
@@ -30,6 +40,10 @@ public class EmprestimoDAO {
         return maior;
     }
 
+    /**
+     * Obtém uma lista de todos os empréstimos registrados no banco de dados.
+     * @return Uma lista de objetos Emprestimo.
+     */
     public ArrayList<Emprestimo> getMinhaLista() {
         ArrayList<Emprestimo> lista = new ArrayList<>();
         String sql = "SELECT * FROM emprestimo";
@@ -53,6 +67,11 @@ public class EmprestimoDAO {
         return lista;
     }
 
+    /**
+     * Insere um novo empréstimo no banco de dados.
+     * @param objeto O objeto Emprestimo a ser inserido.
+     * @return true se a operação for bem-sucedida, false caso contrário.
+     */
     public boolean inserirEmprestimoBD(Emprestimo objeto) {
         String sql = "INSERT INTO emprestimo(nome_amigo, nome_ferramenta, data_emprestimo, data_devolucao, status) VALUES(?, ?, ?, ?, ?)";
         try (Connection conexaoBD = BDConnection.getConnection();
@@ -70,6 +89,11 @@ public class EmprestimoDAO {
         return false;
     }
 
+    /**
+     * Exclui um empréstimo do banco de dados com base no ID fornecido.
+     * @param id O ID do empréstimo a ser excluído.
+     * @return true se a operação for bem-sucedida, false caso contrário.
+     */
     public boolean deleteEmprestimoBD(int id) {
         String sql = "DELETE FROM emprestimo WHERE id_emprestimo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
@@ -83,6 +107,11 @@ public class EmprestimoDAO {
         return false;
     }
 
+    /**
+     * Atualiza as informações de um empréstimo no banco de dados.
+     * @param objeto O objeto Emprestimo com as informações atualizadas.
+     * @return true se a operação for bem-sucedida, false caso contrário.
+     */
     public boolean updateEmprestimoBD(Emprestimo objeto) {
         String sql = "UPDATE emprestimo SET nome_amigo = ?, nome_ferramenta = ?, data_emprestimo = ?, data_devolucao = ?, status = ? WHERE id_emprestimo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
@@ -101,6 +130,11 @@ public class EmprestimoDAO {
         return false;
     }
 
+    /**
+     * Carrega os detalhes de um empréstimo do banco de dados com base no ID fornecido.
+     * @param id O ID do empréstimo a ser carregado.
+     * @return Um objeto Emprestimo com os detalhes do empréstimo carregado, ou null se não for encontrado.
+     */
     public Emprestimo carregaEmprestimoBD(int id) {
         String sql = "SELECT * FROM emprestimo WHERE id_emprestimo = ?";
         try (Connection conexaoBD = BDConnection.getConnection();
@@ -122,7 +156,12 @@ public class EmprestimoDAO {
         }
         return null;
     }
- // Método para verificar se um amigo tem empréstimos abertos
+    
+    /**
+     * Verifica se um amigo possui empréstimos em aberto.
+     * @param nomeAmigo O nome do amigo para verificar os empréstimos em aberto.
+     * @return true se o amigo possui empréstimos em aberto, false caso contrário.
+     */
     public boolean amigoTemEmprestimosAbertos(String nomeAmigo) {
         String sql = "SELECT COUNT(*) FROM emprestimo WHERE nome_amigo = ? AND status = false";
         

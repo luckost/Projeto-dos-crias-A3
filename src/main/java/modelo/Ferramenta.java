@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Ferramenta {
+    // Atributos
     private int id;
     private String nome;
     private String marca;

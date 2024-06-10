@@ -8,7 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * Interface gráfica para gerenciamento de empréstimos.
+ */
 public class frmGerenciaEmprestimos extends javax.swing.JFrame {
  
   private Emprestimo objetoEmprestimo;
@@ -17,7 +19,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
 
 
     /**
-     * Creates new form frmGerenciaEmprestimo
+     * Cria uma nova instância de frmGerenciaEmprestimos.
      */
     public frmGerenciaEmprestimos() {
         initComponents();
@@ -26,7 +28,9 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         this.carregaTabela(); // Passando um nome de amigo "fixo"
     }
-
+/**
+     * Carrega a tabela de empréstimos com os dados da lista de empréstimos.
+     */
       public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.JTableEmprestimo.getModel();
         modelo.setNumRows(0);
@@ -44,7 +48,9 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             });
         }
     }
-
+ /**
+     * Método gerado automaticamente pelo NetBeans para inicialização dos componentes.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -185,7 +191,9 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ /**
+     * Método para atualizar um empréstimo existente.
+     */
     private void JBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAlterarActionPerformed
   try {
             int id = 0;
@@ -222,11 +230,10 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
         }
-    
-    
-    // TODO add your handling code here:
     }//GEN-LAST:event_JBAlterarActionPerformed
-
+/**
+     * Método para apagar um empréstimo existente.
+     */
     private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
      try {
         int id = 0;
@@ -249,10 +256,10 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     } catch (Mensagens erro) {
         JOptionPane.showMessageDialog(null, erro.getMessage());
     }
-        
-   // TODO add your handling code here:
     }//GEN-LAST:event_JBApagarActionPerformed
-
+  /**
+     * Método para selecionar um empréstimo na tabela.
+     */
     private void JTableEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableEmprestimoMouseClicked
      if (this.JTableEmprestimo.getSelectedRow() != -1) {
             String nomeAmigo = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 1).toString();
@@ -276,14 +283,16 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             this.jDateDevolucao.setDate(dataDevolucao);
             this.JStatus.setSelected(status);
         }
-    
-        // TODO add your handling code here:
     }//GEN-LAST:event_JTableEmprestimoMouseClicked
-
+ /**
+     * Método para cancelar a operação e fechar a janela.
+     */
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
     this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
-
+ /**
+     * Método para marcar ou desmarcar o status de entrega do empréstimo.
+     */
     private void JStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JStatusActionPerformed
      int selectedRow = JTableEmprestimo.getSelectedRow();
     if (selectedRow != -1) {

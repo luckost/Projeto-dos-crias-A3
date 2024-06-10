@@ -3,11 +3,14 @@ package visao;
 import modelo.Ferramenta;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-
+/**
+ * Classe responsável por exibir o relatório de ferramentas.
+ */
 public class frmRelatorioFerramentas extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmRelatorioFerramentas
+     * Construtor da classe frmRelatorioFerramentas.
+     * Inicializa os componentes da interface gráfica, carrega a tabela de ferramentas e calcula o total gasto.
      */
     public frmRelatorioFerramentas() {
         initComponents();
@@ -142,11 +145,21 @@ public class frmRelatorioFerramentas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+/**
+     * Método de ação do botão "Voltar".
+     * Fecha a janela de relatório de ferramentas.
+     * @param evt O evento associado ao clique do botão "Voltar".
+     */
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-public static void main(String args[]) {
+/**
+     * Método principal responsável por iniciar a aplicação.
+     * Cria e exibe uma instância da classe frmRelatorioFerramentas.
+     * @param args Os argumentos da linha de comando.
+     */
+    public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -170,7 +183,10 @@ public static void main(String args[]) {
             }
         });
     }
-
+/**
+     * Método responsável por carregar os dados na tabela de ferramentas.
+     * Obtém os dados das ferramentas e atualiza a tabela.
+     */
     private void carregarTabela() {
         Ferramenta ferramenta = new Ferramenta();
         ArrayList<Ferramenta> listaFerramentas = ferramenta.getListaFerramenta();
@@ -182,7 +198,10 @@ public static void main(String args[]) {
             modelo.addRow(new Object[]{f.getId(), f.getNome(), f.getMarca(), f.getCusto()});
         }
     }
-
+ /**
+     * Método responsável por calcular o total gasto em ferramentas.
+     * Atualiza o campo de texto com o valor total.
+     */
     private void calcularTotalGasto() {
         Ferramenta ferramenta = new Ferramenta();
         ArrayList<Ferramenta> listaFerramentas = ferramenta.getListaFerramenta();

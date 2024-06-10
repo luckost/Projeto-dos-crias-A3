@@ -6,9 +6,16 @@ import modelo.Emprestimo;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * Classe frmRelatorioEmprestimos
+ * Representa a interface gráfica para exibição de relatórios de empréstimos.
+ * Exibe uma tabela com dados dos empréstimos, total de empréstimos e o amigo com mais empréstimos.
+ */
 public class frmRelatorioEmprestimos extends javax.swing.JFrame {
-
+ /**
+     * Construtor da classe frmRelatorioEmprestimos.
+     * Inicializa os componentes da interface e carrega os dados na tabela.
+     */
     public frmRelatorioEmprestimos() {
         initComponents();
         carregarDadosTabela(); // Carrega os dados na tabela ao inicializar a interface
@@ -170,7 +177,11 @@ public class frmRelatorioEmprestimos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  private void carregarDadosTabela() {
+   /**
+   * Método responsável por carregar os dados na tabela de empréstimos.
+   * Obtém os dados dos empréstimos, atualiza a tabela, o total de empréstimos e o amigo com mais empréstimos.
+   */
+    private void carregarDadosTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0); // Limpa a tabela antes de adicionar novos dados
 
@@ -212,8 +223,12 @@ public class frmRelatorioEmprestimos extends javax.swing.JFrame {
         // Atualiza o nome do amigo com mais empréstimos
         jLabel5.setText(amigoComMaisEmprestimos);
     }
+    /**
+     * Método de ação do botão "Voltar".
+     * Fecha a janela de relatório de empréstimos.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      this.dispose();        // TODO add your handling code here:
+      this.dispose();        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
