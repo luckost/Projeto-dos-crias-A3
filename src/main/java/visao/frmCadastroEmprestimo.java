@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package visao;
 
 import javax.swing.JOptionPane;
@@ -118,58 +114,63 @@ public class frmCadastroEmprestimo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+// Método para verificar se um amigo tem empréstimos abertos
+    private void verificarEmprestimosAbertos(String nomeAmigo) {
+        boolean temEmprestimosAbertos = this.emprestimoDAO.amigoTemEmprestimosAbertos(nomeAmigo);
+        if (temEmprestimosAbertos) {
+            JOptionPane.showMessageDialog(this, "O amigo " + nomeAmigo + " ainda tem itens não devolvidos.", "Empréstimos Abertos", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
     private void JBCadastrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrar3ActionPerformed
-   try {
-    String nome_amigo = "";
-    String nome_ferramenta = "";
-    Date dataEmprestimo = null;
+  try {
+            String nome_amigo = "";
+            String nome_ferramenta = "";
+            Date dataEmprestimo = null;
 
-    if (this.JTFNomeAmigo.getText().length() < 2) {
-        throw new Mensagens("Nome do amigo deve conter ao menos 2 caracteres.");
-    } else {
-        nome_amigo = this.JTFNomeAmigo.getText();
-    }
+            if (this.JTFNomeAmigo.getText().length() < 2) {
+                throw new Mensagens("Nome do amigo deve conter ao menos 2 caracteres.");
+            } else {
+                nome_amigo = this.JTFNomeAmigo.getText();
+            }
 
-    if (this.JTFNomeFerramenta.getText().length() < 2) {
-        throw new Mensagens("Nome da ferramenta deve conter ao menos 2 caracteres.");
-    } else {
-        nome_ferramenta = this.JTFNomeFerramenta.getText();
-    }
+            if (this.JTFNomeFerramenta.getText().length() < 2) {
+                throw new Mensagens("Nome da ferramenta deve conter ao menos 2 caracteres.");
+            } else {
+                nome_ferramenta = this.JTFNomeFerramenta.getText();
+            }
 
-    // Observe que aqui você precisa converter o texto da data para um objeto Date
-    // dependendo do formato que você está usando. Vou presumir que você está usando um JDateChooser.
-    if (this.JTFDataEmprestimo.getDate() == null) {
-        throw new Mensagens("Selecione uma data de empréstimo válida.");
-    } else {
-        dataEmprestimo = this.JTFDataEmprestimo.getDate();
-    }
+            if (this.JTFDataEmprestimo.getDate() == null) {
+                throw new Mensagens("Selecione uma data de empréstimo válida.");
+            } else {
+                dataEmprestimo = this.JTFDataEmprestimo.getDate();
+            }
 
-    // Cria um novo objeto Emprestimo e define seus atributos
-    Emprestimo novoEmprestimo = new Emprestimo();
-    novoEmprestimo.setNomeAmigo(nome_amigo);
-    novoEmprestimo.setNomeFerramenta(nome_ferramenta);
-    novoEmprestimo.setDataEmprestimo(dataEmprestimo);
+            Emprestimo novoEmprestimo = new Emprestimo();
+            novoEmprestimo.setNomeAmigo(nome_amigo);
+            novoEmprestimo.setNomeFerramenta(nome_ferramenta);
+            novoEmprestimo.setDataEmprestimo(dataEmprestimo);
 
-    EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-    boolean inserido = emprestimoDAO.inserirEmprestimoBD(novoEmprestimo);
+            boolean inserido = this.emprestimoDAO.inserirEmprestimoBD(novoEmprestimo);
 
-    if (inserido) {
-        JOptionPane.showMessageDialog(null, "Empréstimo cadastrado com sucesso!");
-        // Limpa campos da interface
-        this.JTFNomeAmigo.setText("");
-        this.JTFNomeFerramenta.setText("");
-        this.JTFDataEmprestimo.setDate(null); // Limpa a data
-    } else {
-        JOptionPane.showMessageDialog(null, "Erro ao cadastrar empréstimo.");
-    }
-    // Exibindo no console o empréstimo cadastrado
-    System.out.println(novoEmprestimo.getMinhaLista().toString());
-} catch (Mensagens erro) {
-    JOptionPane.showMessageDialog(null, erro.getMessage());
-} catch (NumberFormatException erro2) {
-    JOptionPane.showMessageDialog(null, "Informe um número válido.");
-}
+            if (inserido) {
+                JOptionPane.showMessageDialog(null, "Empréstimo cadastrado com sucesso!");
+                this.JTFNomeAmigo.setText("");
+                this.JTFNomeFerramenta.setText("");
+                this.JTFDataEmprestimo.setDate(null);
+
+                // Verificar se o amigo tem empréstimos abertos
+                verificarEmprestimosAbertos(nome_amigo);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar empréstimo.");
+            }
+
+            System.out.println(novoEmprestimo.getMinhaLista().toString());
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        }
    
 // TODO add your handling code here:
     }//GEN-LAST:event_JBCadastrar3ActionPerformed

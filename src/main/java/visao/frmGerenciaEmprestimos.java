@@ -1,3 +1,4 @@
+
 package visao;
 
 import dao.EmprestimoDAO;
@@ -9,10 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class frmGerenciaEmprestimos extends javax.swing.JFrame {
-
-    private Emprestimo objetoEmprestimo;
-    private EmprestimoDAO emprestimoDAO;
+ 
+  private Emprestimo objetoEmprestimo;
+  private EmprestimoDAO emprestimoDAO;
     private SimpleDateFormat dateFormat;
+
 
     /**
      * Creates new form frmGerenciaEmprestimo
@@ -25,7 +27,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         this.carregaTabela(); // Passando um nome de amigo "fixo"
     }
 
-    public void carregaTabela() {
+      public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.JTableEmprestimo.getModel();
         modelo.setNumRows(0);
 
@@ -40,18 +42,6 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
                 dateFormat.format(emprestimo.getDataDevolucao()),
                 emprestimo.getStatus() ? "Entregue" : "Aberto"
             });
-        }
-    }
-
-    public void removerEmprestimoEntregueTabela() {
-        DefaultTableModel modelo = (DefaultTableModel) this.JTableEmprestimo.getModel();
-        int rowCount = modelo.getRowCount();
-
-        for (int i = rowCount - 1; i >= 0; i--) {
-            boolean status = this.JTableEmprestimo.getValueAt(i, 5).toString().equals("Entregue");
-            if (status) {
-                modelo.removeRow(i);
-            }
         }
     }
 
@@ -197,7 +187,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAlterarActionPerformed
-        try {
+  try {
             int id = 0;
             String nomeAmigo = "";
             String nomeFerramenta = "";
@@ -232,38 +222,39 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
         }
-
-        // TODO add your handling code here:
+    
+    
+    // TODO add your handling code here:
     }//GEN-LAST:event_JBAlterarActionPerformed
 
     private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
-        try {
-            int id = 0;
-            if (this.JTableEmprestimo.getSelectedRow() == -1) {
-                throw new Mensagens("Primeiro selecione um empréstimo para apagar.");
-            } else {
-                id = Integer.parseInt(this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 0).toString());
-            }
-
-            String nomeAmigo = this.jNomeEmprestimo.getText(); // Aqui obtenha o nome do amigo
-
-            int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar este empréstimo?");
-            if (respostaUsuario == 0) {
-                if (this.objetoEmprestimo.deleteEmprestimoBD(id)) {
-                    JOptionPane.showMessageDialog(rootPane, "Empréstimo apagado com sucesso!");
-                }
-            }
-
-            carregaTabela(); // Utilize a variável nomeAmigo
-        } catch (Mensagens erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
+     try {
+        int id = 0;
+        if (this.JTableEmprestimo.getSelectedRow() == -1) {
+            throw new Mensagens("Primeiro selecione um empréstimo para apagar.");
+        } else {
+            id = Integer.parseInt(this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 0).toString());
         }
 
-        // TODO add your handling code here:
+        String nomeAmigo = this.jNomeEmprestimo.getText(); // Aqui obtenha o nome do amigo
+
+        int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar este empréstimo?");
+        if (respostaUsuario == 0) {
+            if (this.objetoEmprestimo.deleteEmprestimoBD(id)) {
+                JOptionPane.showMessageDialog(rootPane, "Empréstimo apagado com sucesso!");
+            }
+        }
+
+        carregaTabela(); // Utilize a variável nomeAmigo
+    } catch (Mensagens erro) {
+        JOptionPane.showMessageDialog(null, erro.getMessage());
+    }
+        
+   // TODO add your handling code here:
     }//GEN-LAST:event_JBApagarActionPerformed
 
     private void JTableEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableEmprestimoMouseClicked
-        if (this.JTableEmprestimo.getSelectedRow() != -1) {
+     if (this.JTableEmprestimo.getSelectedRow() != -1) {
             String nomeAmigo = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 1).toString();
             String nomeFerramenta = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 2).toString();
             String dataEmprestimoStr = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 3).toString();
@@ -285,22 +276,22 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             this.jDateDevolucao.setDate(dataDevolucao);
             this.JStatus.setSelected(status);
         }
-
+    
         // TODO add your handling code here:
     }//GEN-LAST:event_JTableEmprestimoMouseClicked
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
-        this.dispose();
+    this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
 
     private void JStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JStatusActionPerformed
-        int selectedRow = JTableEmprestimo.getSelectedRow();
-        if (selectedRow != -1) {
-            String status = JStatus.isSelected() ? "Entregue" : "Aberto";
-            JTableEmprestimo.setValueAt(status, selectedRow, 6); // Atualiza a célula na coluna de status
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um empréstimo na tabela.");
-        }
+     int selectedRow = JTableEmprestimo.getSelectedRow();
+    if (selectedRow != -1) {
+        String status = JStatus.isSelected() ? "Entregue" : "Aberto";
+        JTableEmprestimo.setValueAt(status, selectedRow, 6); // Atualiza a célula na coluna de status
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecione um empréstimo na tabela.");
+    }
     }//GEN-LAST:event_JStatusActionPerformed
 
     /**

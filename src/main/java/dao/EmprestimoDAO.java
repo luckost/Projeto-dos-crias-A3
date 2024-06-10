@@ -122,47 +122,22 @@ public class EmprestimoDAO {
         }
         return null;
     }
-
- public List<Emprestimo> listarEmprestimosInativosPorAmigo(String nomeAmigo) {
-    List<Emprestimo> emprestimosInativosPorAmigo = new ArrayList<>();
-    String sql = "SELECT * FROM emprestimo WHERE nome_amigo = ? AND status = false";
-    try (Connection conexaoBD = BDConnection.getConnection();
-         PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
-        stmt.setString(1, nomeAmigo);
-        try (ResultSet resposta = stmt.executeQuery()) {
-            while (resposta.next()) {
-                int id = resposta.getInt("id_emprestimo");
-                String nomeFerramenta = resposta.getString("nome_ferramenta");
-                Date dataEmprestimo = resposta.getDate("data_emprestimo");
-                boolean status = resposta.getBoolean("status");
-                Emprestimo emprestimo = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, null, status);
-                emprestimosInativosPorAmigo.add(emprestimo);
-            }
-        }
-    } catch (SQLException ex) {
-        LOGGER.log(Level.SEVERE, "Erro ao listar empréstimos inativos por amigo", ex);
-    }
-    return emprestimosInativosPorAmigo;
-}
-
-
-    public List<Emprestimo> listarEmprestimosAtivos() {
-        List<Emprestimo> emprestimosAtivos = new ArrayList<>();
-        String sql = "SELECT * FROM emprestimo WHERE status = true AND data_devolucao IS NULL";
+ // Método para verificar se um amigo tem empréstimos abertos
+    public boolean amigoTemEmprestimosAbertos(String nomeAmigo) {
+        String sql = "SELECT COUNT(*) FROM emprestimo WHERE nome_amigo = ? AND status = false";
+        
         try (Connection conexaoBD = BDConnection.getConnection();
-             PreparedStatement stmt = conexaoBD.prepareStatement(sql);
-             ResultSet resposta = stmt.executeQuery()) {
-            while (resposta.next()) {
-                int id = resposta.getInt("id_emprestimo");
-                String nomeAmigo = resposta.getString("nome_amigo");
-                String nomeFerramenta = resposta.getString("nome_ferramenta");
-                Date dataEmprestimo = resposta.getDate("data_emprestimo");
-                Emprestimo emprestimo = new Emprestimo(id, nomeAmigo, nomeFerramenta, dataEmprestimo, null, true);
-                emprestimosAtivos.add(emprestimo);
+             PreparedStatement stmt = conexaoBD.prepareStatement(sql)) {
+            
+            stmt.setString(1, nomeAmigo);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next() && rs.getInt(1) > 0) {
+                return true;
             }
-        } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao listar empréstimos ativos", ex);
+        } catch (SQLException erro) {
+            LOGGER.log(Level.SEVERE, "Erro ao verificar empréstimos abertos para o amigo", erro);
         }
-        return emprestimosAtivos;
+        return false;
     }
 }
