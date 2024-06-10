@@ -27,8 +27,9 @@ public class frmSobre extends javax.swing.JFrame {
     private void initComponents() {
 
         JBVoltar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        JBX = new javax.swing.JButton();
 
         JBVoltar.setBackground(new java.awt.Color(255, 51, 51));
         JBVoltar.setText("Voltar");
@@ -38,21 +39,39 @@ public class frmSobre extends javax.swing.JFrame {
             }
         });
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Sistema de Gerenciamento de Empréstimo de Ferramentas\n\nEste software foi desenvolvido para atender às necessidades de gerenciamento de empréstimo de ferramentas do dia a dia. Projetado para ser executado localmente no computador do usuário, nosso programa oferece uma solução simples e eficaz para acompanhar empréstimos de ferramentas entre amigos e familiares.\n\nRecursos Principais:\n\nCadastro de Ferramentas: Registre informações detalhadas sobre suas ferramentas, incluindo nome, marca e custo de aquisição.\nCadastro de Amigos: Mantenha um registro organizado dos amigos e familiares que estão emprestando suas ferramentas, incluindo seus nomes e números de telefone.\nRegistro de Empréstimos: Registre os empréstimos de ferramentas a um determinado amigo, com datas de empréstimo e devolução para fácil acompanhamento.\nRelatórios Detalhados: Acesse relatórios que mostram o custo total das ferramentas adquiridas, bem como os empréstimos ativos e históricos de todos os empréstimos realizados.\nAlertas de Devolução: Receba alertas automáticos quando um amigo ainda tiver ferramentas emprestadas, ajudando a garantir que nada seja esquecido ou perdido.\nObjetivo:\n\nNosso objetivo é fornecer uma solução conveniente e intuitiva para o gerenciamento de empréstimos de ferramentas, simplificando o processo e permitindo que os usuários mantenham um controle eficaz sobre seus pertences e empréstimos.\n\nDesenvolvedores:\n\nEste software foi desenvolvido por Lucas, Bryan, Rafael e Vitor, dedicados a criar ferramentas úteis e práticas para simplificar a vida cotidiana.");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        JBX.setBackground(new java.awt.Color(255, 51, 51));
+        JBX.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        JBX.setText("X");
+        JBX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBXActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(472, Short.MAX_VALUE)
-                .addComponent(JBVoltar)
-                .addGap(30, 30, 30))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(JBX, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(292, Short.MAX_VALUE)
-                .addComponent(JBVoltar)
-                .addGap(14, 14, 14))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(JBX)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -61,6 +80,10 @@ public class frmSobre extends javax.swing.JFrame {
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_JBVoltarActionPerformed
+
+    private void JBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBXActionPerformed
+    this.dispose();   // TODO add your handling code here:
+    }//GEN-LAST:event_JBXActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,6 +122,9 @@ public class frmSobre extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBVoltar;
+    private javax.swing.JButton JBX;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
 

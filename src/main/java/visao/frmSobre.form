@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JButton" name="JBVoltar">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="33" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Voltar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBVoltarActionPerformed"/>
+      </Events>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -24,32 +37,51 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="472" max="32767" attributes="0"/>
-              <Component id="JBVoltar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="JBX" min="-2" pref="55" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jScrollPane1" min="-2" pref="769" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="292" max="32767" attributes="0"/>
-              <Component id="JBVoltar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="JBX" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="364" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="JBVoltar">
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="Sistema de Gerenciamento de Empr&#xe9;stimo de Ferramentas&#xa;&#xa;Este software foi desenvolvido para atender &#xe0;s necessidades de gerenciamento de empr&#xe9;stimo de ferramentas do dia a dia. Projetado para ser executado localmente no computador do usu&#xe1;rio, nosso programa oferece uma solu&#xe7;&#xe3;o simples e eficaz para acompanhar empr&#xe9;stimos de ferramentas entre amigos e familiares.&#xa;&#xa;Recursos Principais:&#xa;&#xa;Cadastro de Ferramentas: Registre informa&#xe7;&#xf5;es detalhadas sobre suas ferramentas, incluindo nome, marca e custo de aquisi&#xe7;&#xe3;o.&#xa;Cadastro de Amigos: Mantenha um registro organizado dos amigos e familiares que est&#xe3;o emprestando suas ferramentas, incluindo seus nomes e n&#xfa;meros de telefone.&#xa;Registro de Empr&#xe9;stimos: Registre os empr&#xe9;stimos de ferramentas a um determinado amigo, com datas de empr&#xe9;stimo e devolu&#xe7;&#xe3;o para f&#xe1;cil acompanhamento.&#xa;Relat&#xf3;rios Detalhados: Acesse relat&#xf3;rios que mostram o custo total das ferramentas adquiridas, bem como os empr&#xe9;stimos ativos e hist&#xf3;ricos de todos os empr&#xe9;stimos realizados.&#xa;Alertas de Devolu&#xe7;&#xe3;o: Receba alertas autom&#xe1;ticos quando um amigo ainda tiver ferramentas emprestadas, ajudando a garantir que nada seja esquecido ou perdido.&#xa;Objetivo:&#xa;&#xa;Nosso objetivo &#xe9; fornecer uma solu&#xe7;&#xe3;o conveniente e intuitiva para o gerenciamento de empr&#xe9;stimos de ferramentas, simplificando o processo e permitindo que os usu&#xe1;rios mantenham um controle eficaz sobre seus pertences e empr&#xe9;stimos.&#xa;&#xa;Desenvolvedores:&#xa;&#xa;Este software foi desenvolvido por Lucas, Bryan, Rafael e Vitor, dedicados a criar ferramentas &#xfa;teis e pr&#xe1;ticas para simplificar a vida cotidiana."/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="JBX">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Voltar"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="X"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBVoltarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBXActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
