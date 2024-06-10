@@ -1,4 +1,3 @@
-
 package visao;
 
 import dao.EmprestimoDAO;
@@ -10,11 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class frmGerenciaEmprestimos extends javax.swing.JFrame {
- 
-  private Emprestimo objetoEmprestimo;
-  private EmprestimoDAO emprestimoDAO;
-    private SimpleDateFormat dateFormat;
 
+    private Emprestimo objetoEmprestimo;
+    private EmprestimoDAO emprestimoDAO;
+    private SimpleDateFormat dateFormat;
 
     /**
      * Creates new form frmGerenciaEmprestimo
@@ -24,16 +22,16 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         this.objetoEmprestimo = new Emprestimo();
         this.emprestimoDAO = new EmprestimoDAO(); // Adicionando inicialização do emprestimoDAO
         this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        this.carregaTabelaInativosPorAmigo("Nome do Amigo"); // Passando um nome de amigo "fixo"
+        this.carregaTabela(); // Passando um nome de amigo "fixo"
     }
 
-   public void carregaTabelaInativosPorAmigo(String nomeAmigo) {
+    public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.JTableEmprestimo.getModel();
         modelo.setNumRows(0);
 
-        ArrayList<Emprestimo> listaEmprestimosInativos = this.objetoEmprestimo.listarEmprestimosInativosPorAmigo(nomeAmigo);
+        ArrayList<Emprestimo> listaEmprestimos = objetoEmprestimo.getMinhaLista();
 
-        for (Emprestimo emprestimo : listaEmprestimosInativos) {
+        for (Emprestimo emprestimo : listaEmprestimos) {
             modelo.addRow(new Object[]{
                 emprestimo.getId(),
                 emprestimo.getNomeAmigo(),
@@ -45,6 +43,18 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         }
     }
 
+    public void removerEmprestimoEntregueTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) this.JTableEmprestimo.getModel();
+        int rowCount = modelo.getRowCount();
+
+        for (int i = rowCount - 1; i >= 0; i--) {
+            boolean status = this.JTableEmprestimo.getValueAt(i, 5).toString().equals("Entregue");
+            if (status) {
+                modelo.removeRow(i);
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,24 +63,23 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         JTableEmprestimo = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jNomeEmprestimo = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jNomeFerramenta = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jDateEmprestimo = new com.toedter.calendar.JDateChooser();
-        jDateDevolucao = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         JStatus = new javax.swing.JCheckBox();
         JBAlterar = new javax.swing.JButton();
         JBApagar = new javax.swing.JButton();
         JBCancelar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jDateEmprestimo = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        jDateDevolucao = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Emprestimos");
         setBackground(new java.awt.Color(0, 0, 0));
-        setMinimumSize(new java.awt.Dimension(600, 365));
+        setMinimumSize(new java.awt.Dimension(790, 380));
         getContentPane().setLayout(null);
 
         JTableEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
@@ -92,7 +101,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(JTableEmprestimo);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(16, 13, 610, 100);
+        jScrollPane1.setBounds(16, 13, 750, 100);
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,13 +109,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(10, 150, 50, 18);
         getContentPane().add(jNomeEmprestimo);
-        jNomeEmprestimo.setBounds(60, 150, 250, 26);
-
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Data de Emprestimo:");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(330, 150, 140, 18);
+        jNomeEmprestimo.setBounds(60, 150, 360, 26);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,17 +117,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 210, 100, 18);
         getContentPane().add(jNomeFerramenta);
-        jNomeFerramenta.setBounds(110, 210, 210, 26);
-
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Data de Devoluçao:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(330, 210, 140, 18);
-        getContentPane().add(jDateEmprestimo);
-        jDateEmprestimo.setBounds(470, 150, 100, 26);
-        getContentPane().add(jDateDevolucao);
-        jDateDevolucao.setBounds(460, 210, 110, 26);
+        jNomeFerramenta.setBounds(110, 210, 320, 26);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setForeground(new java.awt.Color(0, 102, 102));
@@ -138,7 +131,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JStatus);
-        JStatus.setBounds(470, 230, 72, 20);
+        JStatus.setBounds(650, 270, 72, 20);
 
         JBAlterar.setBackground(new java.awt.Color(0, 255, 0));
         JBAlterar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -150,7 +143,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JBAlterar);
-        JBAlterar.setBounds(300, 260, 110, 40);
+        JBAlterar.setBounds(440, 260, 110, 40);
 
         JBApagar.setBackground(new java.awt.Color(255, 0, 0));
         JBApagar.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -162,7 +155,7 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JBApagar);
-        JBApagar.setBounds(170, 260, 110, 40);
+        JBApagar.setBounds(320, 260, 110, 40);
 
         JBCancelar.setBackground(new java.awt.Color(255, 153, 0));
         JBCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -174,25 +167,37 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JBCancelar);
-        JBCancelar.setBounds(30, 260, 100, 40);
+        JBCancelar.setBounds(190, 260, 110, 40);
+        jPanel1.add(jDateEmprestimo);
+        jDateEmprestimo.setBounds(640, 140, 100, 26);
 
-        jButton1.setText("Concluído");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(430, 260, 110, 40);
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Data de Emprestimo:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(500, 140, 140, 18);
+        jPanel1.add(jDateDevolucao);
+        jDateDevolucao.setBounds(630, 190, 110, 26);
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Data de Devoluçao:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(500, 190, 140, 18);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 10, 620, 310);
+        jPanel1.setBounds(10, 10, 760, 310);
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setLayout(null);
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(0, -30, 650, 360);
+        jPanel3.setBounds(0, -30, 780, 360);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAlterarActionPerformed
-  try {
+        try {
             int id = 0;
             String nomeAmigo = "";
             String nomeFerramenta = "";
@@ -221,45 +226,44 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Empréstimo alterado com sucesso!");
             }
 
-            carregaTabelaInativosPorAmigo(nomeAmigo);
+            carregaTabela();
         } catch (Mensagens erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
         }
-    
-    
-    // TODO add your handling code here:
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_JBAlterarActionPerformed
 
     private void JBApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBApagarActionPerformed
-     try {
-        int id = 0;
-        if (this.JTableEmprestimo.getSelectedRow() == -1) {
-            throw new Mensagens("Primeiro selecione um empréstimo para apagar.");
-        } else {
-            id = Integer.parseInt(this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 0).toString());
-        }
-
-        String nomeAmigo = this.jNomeEmprestimo.getText(); // Aqui obtenha o nome do amigo
-
-        int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar este empréstimo?");
-        if (respostaUsuario == 0) {
-            if (this.objetoEmprestimo.deleteEmprestimoBD(id)) {
-                JOptionPane.showMessageDialog(rootPane, "Empréstimo apagado com sucesso!");
+        try {
+            int id = 0;
+            if (this.JTableEmprestimo.getSelectedRow() == -1) {
+                throw new Mensagens("Primeiro selecione um empréstimo para apagar.");
+            } else {
+                id = Integer.parseInt(this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 0).toString());
             }
+
+            String nomeAmigo = this.jNomeEmprestimo.getText(); // Aqui obtenha o nome do amigo
+
+            int respostaUsuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar este empréstimo?");
+            if (respostaUsuario == 0) {
+                if (this.objetoEmprestimo.deleteEmprestimoBD(id)) {
+                    JOptionPane.showMessageDialog(rootPane, "Empréstimo apagado com sucesso!");
+                }
+            }
+
+            carregaTabela(); // Utilize a variável nomeAmigo
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
         }
 
-        carregaTabelaInativosPorAmigo(nomeAmigo); // Utilize a variável nomeAmigo
-    } catch (Mensagens erro) {
-        JOptionPane.showMessageDialog(null, erro.getMessage());
-    }
-        
-   // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_JBApagarActionPerformed
 
     private void JTableEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableEmprestimoMouseClicked
-     if (this.JTableEmprestimo.getSelectedRow() != -1) {
+        if (this.JTableEmprestimo.getSelectedRow() != -1) {
             String nomeAmigo = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 1).toString();
             String nomeFerramenta = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 2).toString();
             String dataEmprestimoStr = this.JTableEmprestimo.getValueAt(this.JTableEmprestimo.getSelectedRow(), 3).toString();
@@ -281,22 +285,22 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
             this.jDateDevolucao.setDate(dataDevolucao);
             this.JStatus.setSelected(status);
         }
-    
+
         // TODO add your handling code here:
     }//GEN-LAST:event_JTableEmprestimoMouseClicked
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
- this.dispose();
+        this.dispose();
     }//GEN-LAST:event_JBCancelarActionPerformed
 
     private void JStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JStatusActionPerformed
-     int selectedRow = JTableEmprestimo.getSelectedRow();
-    if (selectedRow != -1) {
-        String status = JStatus.isSelected() ? "Entregue" : "Aberto";
-        JTableEmprestimo.setValueAt(status, selectedRow, 6); // Atualiza a célula na coluna de status
-    } else {
-        JOptionPane.showMessageDialog(this, "Selecione um empréstimo na tabela.");
-    }
+        int selectedRow = JTableEmprestimo.getSelectedRow();
+        if (selectedRow != -1) {
+            String status = JStatus.isSelected() ? "Entregue" : "Aberto";
+            JTableEmprestimo.setValueAt(status, selectedRow, 6); // Atualiza a célula na coluna de status
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um empréstimo na tabela.");
+        }
     }//GEN-LAST:event_JStatusActionPerformed
 
     /**
@@ -340,7 +344,6 @@ public class frmGerenciaEmprestimos extends javax.swing.JFrame {
     private javax.swing.JButton JBCancelar;
     private javax.swing.JCheckBox JStatus;
     private javax.swing.JTable JTableEmprestimo;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateDevolucao;
     private com.toedter.calendar.JDateChooser jDateEmprestimo;
     private javax.swing.JLabel jLabel1;

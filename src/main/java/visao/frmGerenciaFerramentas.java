@@ -56,6 +56,7 @@ public final class frmGerenciaFerramentas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TabeladeFerramentas");
+        setMinimumSize(new java.awt.Dimension(580, 370));
         getContentPane().setLayout(null);
 
         JBCancelarTab.setBackground(new java.awt.Color(255, 153, 0));
@@ -160,7 +161,7 @@ public final class frmGerenciaFerramentas extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(10, 180, 54, 27);
         jPanel1.add(JTFNomeTab);
-        JTFNomeTab.setBounds(70, 180, 200, 22);
+        JTFNomeTab.setBounds(70, 180, 200, 26);
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -168,9 +169,9 @@ public final class frmGerenciaFerramentas extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(280, 180, 60, 27);
         jPanel1.add(JTFMarcaTab);
-        JTFMarcaTab.setBounds(340, 180, 200, 22);
+        JTFMarcaTab.setBounds(340, 180, 200, 26);
         jPanel1.add(JTFCustoTab);
-        JTFCustoTab.setBounds(70, 240, 200, 22);
+        JTFCustoTab.setBounds(70, 240, 200, 26);
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));

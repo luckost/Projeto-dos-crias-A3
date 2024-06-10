@@ -64,7 +64,7 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tabela de Amigos");
-        setMinimumSize(new java.awt.Dimension(579, 328));
+        setMinimumSize(new java.awt.Dimension(600, 370));
         getContentPane().setLayout(null);
 
         JBApagarTab2.setBackground(new java.awt.Color(255, 0, 51));
@@ -138,7 +138,7 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(210, 130, 130, 35);
         jPanel1.add(JTFNomeTab2);
-        JTFNomeTab2.setBounds(70, 180, 320, 22);
+        JTFNomeTab2.setBounds(70, 180, 320, 26);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,7 +146,7 @@ public class frmGerenciaAmigo extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(10, 180, 60, 24);
         jPanel1.add(JTFTelefoneTab2);
-        JTFTelefoneTab2.setBounds(100, 230, 290, 22);
+        JTFTelefoneTab2.setBounds(100, 230, 290, 26);
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
